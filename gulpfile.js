@@ -5,8 +5,11 @@ const cssnano = require('cssnano');
 const gulp = require('gulp');
 const postcss = require('gulp-postcss');
 const sass = require('gulp-sass');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+const webpackStream = require('webpack-stream');
 
-gulp.task('default', ['css']);
+gulp.task('default', ['css', 'js']);
 
 /**
  *
@@ -27,4 +30,10 @@ gulp.task('css', () => {
       cssnano()
     ]))
     .pipe(gulp.dest('build/s3/css'));
+});
+
+gulp.task('js', () => {
+  return gulp.src('src/public/js/*.js')
+    .pipe(webpackStream(webpackConfig, webpack))
+    .pipe(gulp.dest('build/s3/js'));
 });
