@@ -14,6 +14,7 @@ const webpackStream = require('webpack-stream');
 
 gulp.task('default', ['build']);
 gulp.task('build', ['clean', 'copy', 'css', 'images', 'js']);
+gulp.task('js', ['js-client']);
 
 /**
  * Clean
@@ -56,7 +57,7 @@ gulp.task('css', ['clean'], () => {
             return done({ file: url });
           }
 
-          done({ file: './node_modules/' + url.substr(1) });
+          done({ file: `./node_modules/${url.slice(1)}` });
       }
     }))
     .pipe(postcss([
@@ -81,9 +82,9 @@ gulp.task('images', ['clean'], () => {
 });
 
 /**
- * JS
+ * Client JS
  */
-gulp.task('js', ['clean'], () => {
+gulp.task('js-client', ['clean'], () => {
   return gulp.src('src/public/js/*.js')
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('build/s3/js'));
