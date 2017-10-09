@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://mygov.org.nz/tools</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 2014 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MjAxNCxAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 2011 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MjAxMSxAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 2008 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MjAwOCxAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 2005 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MjAwNSxAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 2002 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MjAwMixAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 1999 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MTk5OSxAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- Non-voter / 1996 -->
+        <loc>https://mygov.org.nz/tools/non-voters/MTk5NixAbm8sMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 2014 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MjAxNCwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 2011 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MjAxMSwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 2008 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MjAwOCwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 2005 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MjAwNSwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 2002 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MjAwMiwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 1999 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MTk5OSwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <!-- MMP Review / 1996 -->
+        <loc>https://mygov.org.nz/tools/mmp-review/MTk5NiwwLjA1LDEsMSwx</loc>
+        <lastmod>2016-07-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+</urlset>

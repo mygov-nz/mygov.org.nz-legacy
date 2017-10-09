@@ -27,8 +27,10 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: [
-            'env',
-            // 'react'
+            ['env', {
+              //
+            }],
+            'react'
           ]
         }
       }
@@ -53,6 +55,9 @@ module.exports = {
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
     }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'common'
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       comments: false,
