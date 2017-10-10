@@ -1,0 +1,39 @@
+.custom-select {
+  width: 100%;
+}
+
+.custom-checkbox {
+  margin-right: 0;
+  padding-left: 15px;
+
+  .input-label {
+    padding-left: 1.5rem;
+  }
+
+  .custom-control-indicator {
+    left: 15px;
+  }
+}
+
+.input-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .3125rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .custom-checkbox {
+    min-height: 4.1875rem;
+
+    .input-label {
+      padding-left: 0;
+    }
+
+    .custom-control-indicator {
+      height: 2.375rem;
+      left: 15px;
+      top: 1.8125rem;
+      width: 2.375rem;
+    }
+  }
+}

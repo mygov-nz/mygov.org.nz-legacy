@@ -1,11 +1,16 @@
 .navbar-brand {
   font-weight: 600;
-  margin-top: -.125rem;
+  margin: 0 -1rem;
+  padding: .8rem 1rem .825rem;
   text-transform: lowercase;
+
+  &:focus {
+    background-color: $brand-hover-colour;
+  }
 }
 
 .mg-navbar {
-  background-color: theme-color("primary");
+  background-color: $brand-colour;
   padding: 0 1rem;
 
   .nav-link {
@@ -13,6 +18,7 @@
   }
 
   .nav-link:hover,
+  .nav-link:focus,
   .nav-link.active,
   .nav-item.dropdown.show .nav-link {
     background-color: $brand-hover-colour;
@@ -27,9 +33,14 @@
   .dropdown-item {
     padding: 1rem;
   }
+
+  .dropdown-item.active,
+  .dropdown-item:active {
+    background-color: $brand-colour;
+  }
 }
 
-@media (min-width: 576px) {
+@include media-breakpoint-up(sm) {
   .mg-navbar .navbar-nav .nav-link {
     padding: 1rem;
   }

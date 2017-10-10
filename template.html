@@ -15,11 +15,7 @@
         <link rel="mask-icon" href="./build/s3/images/pinned-tab-icon.svg" color="#f89828" />
     </head>
     <body>
-        <a id="skippy" class="sr-only sr-only-focusable" href="#content">
-            <div class="container-fluid">
-                <span class="skiplink-text">Skip to main content</span>
-            </div>
-        </a>
+        <a class="skippy sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark mg-navbar">
@@ -52,15 +48,52 @@
           </header>
 
           <p>This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.</p>
+
+          <form class="row">
+            <label class="col-sm-6 col-md-4 col-xl form-group" for="year">
+              <span class="input-label">Data year</span>
+              <select class="custom-select" id="year" name="year" required>
+                <option selected>2017</option>
+                <option>2014</option>
+                <option>2011</option>
+                <option>2008</option>
+                <option>2005</option>
+                <option>2002</option>
+                <option>1999</option>
+                <option>1996</option>
+              </select>
+            </label>
+            <label class="col-sm-6 col-md-4 col-xl form-group" for="threshold">
+              <span class="input-label">Party vote threshold</span>
+              <div class="input-group">
+                <input class="form-control" type="number" id="threshold" name="threshold" max="100" min="0" step="1" value="5" required />
+                <div class="input-group-addon">%</div>
+              </div>
+            </label>
+            <label class="col-sm-6 col-md-4 col-xl form-group custom-control custom-checkbox" for="overhang">
+              <span class="input-label">Allow overhang seats</span>
+              <input type="checkbox" class="custom-control-input" id="overhang" name="overhang" value="on" checked />
+              <span class="custom-control-indicator"></span>
+            </label>
+            <label class="col-sm-6 col-md-4 col-xl form-group custom-control custom-checkbox" for="tagAlong">
+              <span class="input-label">Electorate tag-along</span>
+              <input type="checkbox" class="custom-control-input" id="tagAlong" name="tagAlong" value="on" checked />
+              <span class="custom-control-indicator"></span>
+            </label>
+            <label class="col-sm-6 col-md-4 col-xl form-group" for="tagAlongSeats">
+              <span class="input-label">Seats for tag-along</span>
+              <input class="form-control" type="number" id="tagAlongSeats" name="tagAlongSeats" max="120" min="1" step="1" value="1" required />
+            </label>
+          </form>
         </div>
 
         <footer class="mg-footer">
           <a href="https://mygov.org.nz">mygov.org.nz</a>
         </footer>
 
-        <script src="./build/s3/js/behaviour.js" async defer></script>
-        <script src="./build/s3/js/mmp-review-tool.js" async defer></script>
         <script>window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')</script>
+        <script src="./build/s3/js/behaviour.js" async></script>
+        <script src="./build/s3/js/mmp-review-tool.js" async></script>
         <script src="//google-analytics.com/analytics.js" async defer></script>
     </body>
 </html>
