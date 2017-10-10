@@ -1,8 +1,11 @@
 'use strict';
 
 import 'types';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { getData, getYears } from 'data';
+import { createElement } from 'react';
+import { hydrate } from 'react-dom';
+// import { getData, getYears } from 'data';
+import MMPReviewTool from 'views/tools/MMPReviewTool';
 
-console.log(getYears().map(getData));
+const root = createElement(MMPReviewTool);
+
+hydrate(root, document.getElementById('content'));

@@ -17,7 +17,8 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
       'node_modules',
-      'src'
+      'src',
+      'src/node_modules'
     ]
   },
   module: {
@@ -46,8 +47,8 @@ module.exports = {
       }
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
+      minimize: false,
+      debug: true
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -55,6 +56,7 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
       Util: "exports-loader?Util!bootstrap/js/dist/util",
+      Collapse: "exports-loader?Util!bootstrap/js/dist/collapse",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
     })
     // new webpack.optimize.CommonsChunkPlugin({

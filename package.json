@@ -36,6 +36,8 @@
     "jquery": "^3.2.1",
     "merge-stream": "^1.0.1",
     "popper.js": "^1.12.5",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "serverless": "^1.23.0",
     "serverless-gulp": "^1.0.10",
     "webpack": "^3.6.0",

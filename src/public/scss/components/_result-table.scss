@@ -11,7 +11,7 @@
   }
 
   tbody th {
-    padding-left: 1.5rem;
+    padding-left: 2.5rem;
     position: relative;
     text-align: left;
   }
@@ -31,11 +31,11 @@
   }
 
   .swatch {
-    display: block;
-    height: 100%;
-    left: 0;
+    height: 25%;
+    left: 1rem;
     position: absolute;
-    top: 0;
-    width: .5rem;
+    top: 37.5%;
+    width: .75rem;
+    border-radius: .375rem;
   }
 }
