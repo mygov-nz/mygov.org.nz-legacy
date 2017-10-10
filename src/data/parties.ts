@@ -1,4 +1,4 @@
-const parties = {
+const parties: IDataParty = {
     "@nw": ["A new party", "e67e22"],
     "@nn": ["A new party with no List MPs", "e67e22"],
     act: ["ACT New Zealand", "ffcb05"],

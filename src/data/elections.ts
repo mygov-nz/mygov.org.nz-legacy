@@ -1,4 +1,4 @@
-const elections = {
+const elections: IDataElection = {
 
     "2017": {
         t: 3569830,

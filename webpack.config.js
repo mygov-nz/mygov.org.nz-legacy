@@ -14,23 +14,25 @@ module.exports = {
     path: path.resolve(__dirname, 'build/s3/js')
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
-      'node_modules'
+      'node_modules',
+      'src'
     ]
   },
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
           presets: [
-            ['env', {
+            /* ['env', {
               //
-            }],
-            'react'
+            }], */
+            'react',
+            'typescript'
           ]
         }
       }
@@ -54,11 +56,11 @@ module.exports = {
       Popper: ['popper.js', 'default'],
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
-    }),
+    })
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common'
     // }),
-    new webpack.optimize.UglifyJsPlugin({
+    /* new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       comments: false,
       compress: {
@@ -69,6 +71,6 @@ module.exports = {
         keep_fnames: true,
         screw_ie8: true
       }
-    })
+    }) */
   ]
 };
