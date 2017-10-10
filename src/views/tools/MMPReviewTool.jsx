@@ -1,9 +1,10 @@
 import * as React from "react";
+import ResultTable from "./widgets/ResultTable";
 
 /**
  *
  */
-class MMPReviewTool extends React.PureComponent {
+class MMPReviewTool extends React.PureComponent<IMMPReviewProps, undefined> {
 
   /**
    *
@@ -58,76 +59,7 @@ class MMPReviewTool extends React.PureComponent {
           </form>
         </div>
 
-        <table className="table result-table">
-          <colgroup>
-            <col width="35%" />
-            <col className="d-none d-sm-table-cell" width="13%" />
-            <col className="d-none d-sm-table-cell" width="13%" />
-            <col width="13%" />
-            <col width="13%" />
-            <col width="13%" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>&nbsp;</th>
-              <th className="d-none d-sm-table-cell" scope="col">Votes</th>
-              <th className="d-none d-sm-table-cell" scope="col">Electorates</th>
-              <th scope="col">List <span className="d-none d-lg-inline">Seats</span></th>
-              <th scope="col">Total <span className="d-none d-lg-inline">Seats</span></th>
-              <th scope="col">Diff<span className="d-none d-md-inline">erence</span></th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <td>&nbsp;</td>
-              <td className="d-none d-sm-table-cell">1</td>
-              <td className="d-none d-sm-table-cell">1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td className="d-none d-sm-table-cell" colSpan="2">&nbsp;</td>
-              <th scope="row" colSpan="2">Gallagher Index</th>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr>
-              <th scope="row">National Party <span className="swatch d-none d-sm-block" style={{ background: "#00529f" }}></span></th>
-              <td className="d-none d-sm-table-cell">1,131,501</td>
-              <td className="d-none d-sm-table-cell">41</td>
-              <td>19</td>
-              <td>6</td>
-              <td></td>
-            </tr>
-            <tr className="success">
-              <th scope="row">National Party <span className="swatch d-none d-sm-block" style={{ background: "#00529f" }}></span></th>
-              <td className="d-none d-sm-table-cell">1,131,501</td>
-              <td className="d-none d-sm-table-cell">41</td>
-              <td>19</td>
-              <td>6</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="row">National Party <span className="swatch d-none d-sm-block" style={{ background: "#00529f" }}></span></th>
-              <td className="d-none d-sm-table-cell">1,131,501</td>
-              <td className="d-none d-sm-table-cell">41</td>
-              <td>19</td>
-              <td>6</td>
-              <td className="decrease">-1</td>
-            </tr>
-            <tr>
-              <th scope="row">National Party <span className="swatch d-none d-sm-block" style={{ background: "#00529f" }}></span></th>
-              <td className="d-none d-sm-table-cell">1,131,501</td>
-              <td className="d-none d-sm-table-cell">41</td>
-              <td>19</td>
-              <td>6</td>
-              <td className="increase">+2</td>
-            </tr>
-          </tbody>
-        </table>
+        <ResultTable rows={this.props.rows} />
 
       </main>
     );
