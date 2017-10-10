@@ -1,0 +1,11 @@
+.mg-page-header {
+  border-bottom: 1px solid $gray-200;
+  margin: 0 0 1.5rem;
+  padding: 1.3125rem 0 .625rem;
+
+  h1 {
+    color: $brand-hover-colour;
+    font-size: 3.5rem;
+    font-weight: 500;
+  }
+}

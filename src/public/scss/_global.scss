@@ -1,0 +1,7 @@
+::selection {
+  background-color: transparentize($brand-colour, .75);
+}
+
+.container-fluid {
+  max-width: 75rem;
+}

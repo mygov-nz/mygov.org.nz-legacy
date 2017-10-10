@@ -1,9 +1,36 @@
 .navbar-brand {
   font-weight: 600;
-  margin-top: -2px;
+  margin-top: -.125rem;
   text-transform: lowercase;
 }
 
 .mg-navbar {
   background-color: theme-color("primary");
+  padding: 0 1rem;
+
+  .nav-link {
+    padding: 1rem;
+  }
+
+  .nav-link:hover,
+  .nav-link.active,
+  .nav-item.dropdown.show .nav-link {
+    background-color: $brand-hover-colour;
+  }
+
+  .dropdown-menu {
+    border-radius: 0 0 $border-radius $border-radius;
+    border-top-width: 0;
+    margin: 0;
+  }
+
+  .dropdown-item {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .mg-navbar .navbar-nav .nav-link {
+    padding: 1rem;
+  }
 }

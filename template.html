@@ -16,15 +16,16 @@
     </head>
     <body>
         <a id="skippy" class="sr-only sr-only-focusable" href="#content">
-            <div class="container">
+            <div class="container-fluid">
                 <span class="skiplink-text">Skip to main content</span>
             </div>
         </a>
 
         <header>
           <nav class="navbar navbar-expand-sm navbar-dark mg-navbar">
-            <a class="navbar-brand" href="#">MyGov</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#" rel="home">MyGov</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -36,7 +37,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="/tools" id="navbar-tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-tools">
-                    <a class="dropdown-item" href="#">MMP Review Tool</a>
+                    <a class="dropdown-item active" href="#">MMP Review Tool</a>
                     <a class="dropdown-item" href="#">Non-voters Tool</a>
                   </div>
                 </li>
@@ -45,14 +46,20 @@
           </nav>
         </header>
 
-        <div id="content">
+        <div id="content" class="container-fluid">
           <header class="mg-page-header">
             <h1>MMP Review Tool</h1>
           </header>
+
+          <p>This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.</p>
         </div>
 
+        <footer class="mg-footer">
+          <a href="https://mygov.org.nz">mygov.org.nz</a>
+        </footer>
+
         <script src="./build/s3/js/behaviour.js"></script>
-        <script>window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-XXXXX-Y','auto');ga('send','pageview')</script>
+        <script>window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')</script>
         <script src="//google-analytics.com/analytics.js" async defer></script>
     </body>
 </html>
