@@ -51,7 +51,7 @@
 
           <div class="card form-card">
             <form class="row">
-              <label class="col-sm-6 col-md-4 col-xl form-group" for="year">
+              <label class="col-sm-12 col-md-8 col-xl form-group" for="year">
                 <span class="input-label">Data year</span>
                 <select class="custom-select" id="year" name="year" required>
                   <option selected>2017</option>
@@ -124,6 +124,14 @@
               </tr>
             </tfoot>
             <tbody>
+              <tr>
+                <th scope="row">National Party <span class="swatch d-none d-sm-block" style="background: #00529f"></span></th>
+                <td class="d-none d-sm-table-cell">1,131,501</td>
+                <td class="d-none d-sm-table-cell">41</td>
+                <td>19</td>
+                <td>6</td>
+                <td></td>
+              </tr>
               <tr class="success">
                 <th scope="row">National Party <span class="swatch d-none d-sm-block" style="background: #00529f"></span></th>
                 <td class="d-none d-sm-table-cell">1,131,501</td>
@@ -131,6 +139,22 @@
                 <td>19</td>
                 <td>6</td>
                 <td></td>
+              </tr>
+              <tr>
+                <th scope="row">National Party <span class="swatch d-none d-sm-block" style="background: #00529f"></span></th>
+                <td class="d-none d-sm-table-cell">1,131,501</td>
+                <td class="d-none d-sm-table-cell">41</td>
+                <td>19</td>
+                <td>6</td>
+                <td class="decrease">-1</td>
+              </tr>
+              <tr>
+                <th scope="row">National Party <span class="swatch d-none d-sm-block" style="background: #00529f"></span></th>
+                <td class="d-none d-sm-table-cell">1,131,501</td>
+                <td class="d-none d-sm-table-cell">41</td>
+                <td>19</td>
+                <td>6</td>
+                <td class="increase">+2</td>
               </tr>
             </tbody>
           </table>
@@ -185,12 +209,12 @@
                   </optgroup>
                 </select>
               </label>
-              <label class="col-sm-6 col-md-4 col-xl form-group custom-control custom-checkbox" for="unenrolled">
+              <label class="d-none d-md-block col-md-4 col-xl form-group custom-control custom-checkbox" for="unenrolled">
                 <span class="input-label">Include unenrolled voters</span>
                 <input type="checkbox" class="custom-control-input" id="unenrolled" name="unenrolled" value="on" checked />
                 <span class="custom-control-indicator"></span>
               </label>
-              <label class="col-sm-6 col-md-4 col-xl form-group custom-rangeslider" for="votes">
+              <label class="col-sm-12 col-xl form-group custom-rangeslider" for="votes">
                 <span class="input-label">Percentage</span>
                 <input type="hidden" id="votes" name="votes" value="50" step="5" max="100" min="0" required />
                 <div class="rangeslider">

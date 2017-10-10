@@ -39,7 +39,7 @@
     position: relative;
 
     .fill {
-      background-color: rgba(0, 0, 0, .05);
+      background-color: rgba(0, 0, 0, .1);
       border-radius: 1px;
       height: 100%;
       top: 0;
@@ -47,7 +47,7 @@
 
     .handle {
       background-color: $white;
-      border: 1px solid rgba(0, 0, 0, .15);
+      border: 1px solid rgba(0, 0, 0, .2);
       border-radius: $btn-border-radius-sm;
       color: $gray-700;
       cursor: pointer;
@@ -55,7 +55,7 @@
       height: 2rem;
       line-height: 1;
       margin-left: -1.5rem;
-      padding: .5rem 0;
+      padding: .4375rem 0;
       position: absolute;
       text-align: center;
       top: -.5rem;
