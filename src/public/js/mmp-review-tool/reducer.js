@@ -1,9 +1,7 @@
 import * as constants from './constants';
-import { getData } from 'data';
 
 const initialState = {
-  year: '2017',
-  data: getData('2017')
+  year: '2017'
 };
 
 /**

@@ -17,8 +17,8 @@ class ResultRow extends React.PureComponent {
           { this.props.name }
           <span className="swatch d-none d-sm-block" style={{ background: `#${ this.props.swatch }` }}></span>
         </th>
-        <td className="d-none d-sm-table-cell">{ this.props.votes }</td>
-        <td className="d-none d-sm-table-cell">{ this.props.electorateSeats }</td>
+        <td className="d-none d-sm-table-cell">{ this.props.votes.toLocaleString() }</td>
+        <td className="d-none d-sm-table-cell">{ this.props.electorates }</td>
         <td>{ this.props.listSeats }</td>
         <td>{ this.props.totalSeats }</td>
         <td className={ differenceClasses(this.props.seatDifference) }>{ differenceValue(this.props.seatDifference, 0) }</td>

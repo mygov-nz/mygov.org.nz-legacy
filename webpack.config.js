@@ -6,8 +6,8 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     behaviour: './src/public/js/behaviour.js',
-    'mmp-review-tool': './src/public/js/mmp-review-tool.js',
-    'non-voters-tool': './src/public/js/non-voters-tool.js'
+    'mmp-review-tool': './src/public/js/mmp-review-tool/mmp-review-tool.js',
+    'non-voters-tool': './src/public/js/non-voters-tool/non-voters-tool.js'
   },
   output: {
     filename: '[name].js',

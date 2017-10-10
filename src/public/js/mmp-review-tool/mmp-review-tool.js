@@ -7,8 +7,9 @@ import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import history from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
-import store from 'lib/mmp-review-tool/store';
+import store from './store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
+import * as selectors from './selectors';
 
 /**
  *
@@ -17,8 +18,9 @@ import MMPReviewTool from 'views/tools/MMPReviewTool';
  */
 function mapStateToProps(state) {
   return {
-    rows: state.data.parties
-  };
+    year: state.year,
+    rows: selectors.dataSelector(state).parties
+  }
 }
 
 /**
