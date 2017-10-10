@@ -1,0 +1,41 @@
+.result-table {
+  text-align: right;
+
+  th {
+    font-weight: $font-weight-bold;
+  }
+
+  thead th,
+  thead td {
+    border-top-width: 0;
+  }
+
+  tbody th {
+    padding-left: 1.5rem;
+    position: relative;
+    text-align: left;
+  }
+
+  .success {
+    background-color: transparentize($green, .9);
+  }
+
+  .increase,
+  .gallagher-decrease {
+    color: $green;
+  }
+
+  .decrease,
+  .gallagher-increase {
+    color: $red;
+  }
+
+  .swatch {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: .5rem;
+  }
+}

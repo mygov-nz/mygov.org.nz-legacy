@@ -21,6 +21,49 @@
   margin-bottom: .3125rem;
 }
 
+.form-card {
+  background-color: $gray-100;
+  border-color: $gray-200;
+  margin: 2.25rem 0 1rem;
+  padding: .6875rem 1rem 0;
+}
+
+.custom-rangeslider {
+  min-height: 4.1875rem;
+
+  .rangeslider {
+    background-color: $custom-control-indicator-bg;
+    border-radius: $btn-border-radius-sm;
+    height: 1rem;
+    margin-top: 1rem;
+    position: relative;
+
+    .fill {
+      background-color: rgba(0, 0, 0, .05);
+      border-radius: 1px;
+      height: 100%;
+      top: 0;
+    }
+
+    .handle {
+      background-color: $white;
+      border: 1px solid rgba(0, 0, 0, .15);
+      border-radius: $btn-border-radius-sm;
+      color: $gray-700;
+      cursor: pointer;
+      display: inline-block;
+      height: 2rem;
+      line-height: 1;
+      margin-left: -1.5rem;
+      padding: .5rem 0;
+      position: absolute;
+      text-align: center;
+      top: -.5rem;
+      width: 3rem;
+    }
+  }
+}
+
 @include media-breakpoint-up(sm) {
   .custom-checkbox {
     min-height: 4.1875rem;
