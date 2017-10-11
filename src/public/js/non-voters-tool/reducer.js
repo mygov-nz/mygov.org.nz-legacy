@@ -2,7 +2,7 @@ import * as constants from './constants';
 
 const initialState = {
   party: '@no',
-  unenrolled: true,
+  unenrolled: false,
   votes: 50,
   year: '2017'
 };

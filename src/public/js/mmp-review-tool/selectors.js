@@ -90,11 +90,11 @@ export const resultSelector = createSelector(
       totalVotes: current.reduce(rowReducer('votes'), 0),
       totalElectorateSeats: current.reduce(rowReducer('electorates'), 0),
       totalListSeats: current.reduce(rowReducer('lists'), 0),
-      totalSeats: current.reduce(rowReducer('allocated'), 0),
       gallagherIndex: gallagher(current.map(forGallagher))
     };
 
-    results.seatDifference = results.totalSeats - original.reduce(rowReducer('allocated'), 0);
+    results.totalSeats = results.totalElectorateSeats + results.totalListSeats;
+    results.seatDifference = results.totalSeats - (original.reduce(rowReducer('electorates'), 0) + original.reduce(rowReducer('lists'), 0));
     results.gallagherIndexDifference = results.gallagherIndex - gallagher(original.map(forGallagher));
 
     results.rows = current.map((row, i) => {

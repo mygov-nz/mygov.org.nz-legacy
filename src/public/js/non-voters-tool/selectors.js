@@ -2,6 +2,7 @@ import { createSelector, defaultMemoize } from 'reselect';
 import { getData, getParties } from 'data';
 import gallagher from 'gallagher';
 import sainteLague from 'saintelague';
+import * as constants from './constants';
 
 const params = {
   overhang: true,
@@ -64,8 +65,33 @@ export const resultSelector = createSelector(
   (party, unenrolled, votes, year) => {
     const data = getData(year);
     const parties = getParties();
-    const current = sainteLague(data.parties.map(forSainteLague), params);
     const original = sainteLague(data.parties.map(forSainteLague), params);
+
+    const allocate = unenrolled ? (data.totalVoters - data.activeVoters) : (data.enrolledVoters - data.activeVoters);
+    const rows = data.parties.map(row => {
+      return {
+        name: row[0],
+        votes: row[0] !== party ? row[1] : row[1] + allocate,
+        electorates: row[2] || 0
+      };
+    });
+
+    if (party === constants.PARTY_NEW) {
+      rows.push({
+        name: constants.PARTY_NEW,
+        votes: allocate,
+        electorates: 0
+      });
+    } else if (party === constants.PARTY_NEW_NO_LIST) {
+      rows.push({
+        name: constants.PARTY_NEW_NO_LIST,
+        votes: allocate,
+        electorates: 0,
+        listSize: 0
+      });
+    }
+
+    const current = sainteLague(rows, params);
 
     const results = {
       totalVotes: current.reduce(rowReducer('votes'), 0),
@@ -75,7 +101,8 @@ export const resultSelector = createSelector(
       gallagherIndex: gallagher(current.map(forGallagher))
     };
 
-    results.seatDifference = results.totalSeats - original.reduce(rowReducer('allocated'), 0);
+    results.totalSeats = results.totalElectorateSeats + results.totalListSeats;
+    results.seatDifference = results.totalSeats - (original.reduce(rowReducer('electorates'), 0) + original.reduce(rowReducer('lists'), 0));
     results.gallagherIndexDifference = results.gallagherIndex - gallagher(original.map(forGallagher));
 
     results.rows = current.map((row, i) => {
@@ -88,8 +115,8 @@ export const resultSelector = createSelector(
         votes: row.votes,
         electorateSeats: row.electorates,
         listSeats: row.lists,
-        totalSeats: row.allocated,
-        seatDifference: row.allocated - original[i].allocated
+        totalSeats: row.electorates + row.lists,
+        seatDifference: (undefined !== original[i]) ? ((row.electorates + row.lists) - (original[i].electorates + original[i].lists)) : (row.electorates + row.lists)
       };
     });
 
