@@ -5,7 +5,7 @@ import { getYears } from "data";
 /**
  *
  */
-class MMPReviewTool extends React.PureComponent<IMMPReviewProps, undefined> {
+class MMPReviewTool extends React.PureComponent {
 
   /**
    *

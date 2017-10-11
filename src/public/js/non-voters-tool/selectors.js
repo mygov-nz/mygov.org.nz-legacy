@@ -3,10 +3,16 @@ import { getData, getParties } from 'data';
 import gallagher from 'gallagher';
 import sainteLague from 'saintelague';
 
-const overhangSelector = state => state.overhang;
-const tagAlongSelector = state => state.tagAlong;
-const tagAlongSeatsSelector = state => state.tagAlongSeats;
-const thresholdSelector = state => state.threshold;
+const params = {
+  overhang: true,
+  tagAlong: true,
+  tagAlongSeats: 1,
+  threshold: 0.05
+};
+
+const partySelector = state => state.party;
+const unenrolledSelector = state => state.unenrolled;
+const votesSelector = state => state.votes;
 const yearSelector = state => state.year;
 
 /**
@@ -46,45 +52,20 @@ const forSainteLague = party => {
 const rowReducer = defaultMemoize(field => (total, row) => total + row[field]);
 
 /**
- * Calculation selector
- *
- * @type {Function}
- */
-const calculationSelector = createSelector(
-  yearSelector,
-  thresholdSelector,
-  overhangSelector,
-  tagAlongSelector,
-  tagAlongSeatsSelector,
-  (year, threshold, overhang, tagAlong, tagAlongSeats) => {
-    return sainteLague(getData(year).parties.map(forSainteLague), {
-      overhang: overhang,
-      seats: 120,
-      tagAlong: tagAlong,
-      tagAlongSeats: tagAlongSeats,
-      threshold: threshold / 100
-    });
-  }
-);
-
-/**
  * Result selector
  *
  * @type {Function}
  */
 export const resultSelector = createSelector(
+  partySelector,
+  unenrolledSelector,
+  votesSelector,
   yearSelector,
-  calculationSelector,
-  (year, current) => {
+  (party, unenrolled, votes, year) => {
+    const data = getData(year);
     const parties = getParties();
-    const original = calculationSelector({
-      overhang: true,
-      seats: 120,
-      tagAlong: true,
-      tagAlongSeats: 1,
-      threshold: 5,
-      year: year
-    });
+    const current = sainteLague(data.parties.map(forSainteLague), params);
+    const original = sainteLague(data.parties.map(forSainteLague), params);
 
     const results = {
       totalVotes: current.reduce(rowReducer('votes'), 0),
