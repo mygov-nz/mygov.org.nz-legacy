@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import store from './store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
 import { resultSelector } from './selectors';
+import * as actions from './actions';
 
 /**
  *
@@ -31,7 +32,13 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    //
+    handlers: {
+      setOverhang: event => dispatch(actions.setOverhang(event.target.checked)),
+      setTagAlong: event => dispatch(actions.setTagAlong(event.target.checked)),
+      setTagAlongSeats: event => dispatch(actions.setTagAlongSeats(event.target.value)),
+      setThreshold: event => dispatch(actions.setThreshold(event.target.value)),
+      setYear: event => dispatch(actions.setYear(event.target.value))
+    }
   };
 }
 

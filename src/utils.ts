@@ -4,7 +4,7 @@
  * @param {string} prefix
  * @returns {string}
  */
-export function differenceClasses(value: number, prefix: string): string {
+export function differenceClasses(value: number, prefix: string = ''): string {
   return value > 0 ? `${prefix}increase` : (value < 0 ? `${prefix}decrease` : '');
 }
 

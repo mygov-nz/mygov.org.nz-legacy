@@ -12,8 +12,6 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
    * @returns {JSX.Element}
    */
   render() {
-    console.log(this.props);
-
     return (
       <table className="table result-table">
         <colgroup>
@@ -51,7 +49,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
           </tr>
         </tfoot>
         <tbody>
-          { this.props.rows.map(this.renderRow) }
+          { this.props.rows.sort((a, b) => a.votes > b.votes ? -1 : 1).map(this.renderRow) }
         </tbody>
       </table>
     );
