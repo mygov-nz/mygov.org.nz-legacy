@@ -12,6 +12,8 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
    * @returns {JSX.Element}
    */
   render() {
+    console.log(this.props);
+
     return (
       <table className="table result-table">
         <colgroup>
@@ -35,7 +37,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
         <tfoot>
           <tr>
             <td>&nbsp;</td>
-            <td className="d-none d-sm-table-cell">{ this.props.totalVotes }</td>
+            <td className="d-none d-sm-table-cell">{ this.props.totalVotes.toLocaleString() }</td>
             <td className="d-none d-sm-table-cell">{ this.props.totalElectorateSeats }</td>
             <td>{ this.props.totalListSeats }</td>
             <td>{ this.props.totalSeats }</td>
@@ -45,7 +47,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
             <td className="d-none d-sm-table-cell" colSpan="2">&nbsp;</td>
             <th scope="row" colSpan="2">Gallagher Index</th>
             <td>{ roundFloat(this.props.gallagherIndex) }</td>
-            <td className={ differenceClasses(this.props.gallagherIndexDifference) }>{ differenceValue(this.props.gallagherIndexDifference) }</td>
+            <td className={ differenceClasses(this.props.gallagherIndexDifference, "gallagher-") }>{ differenceValue(this.props.gallagherIndexDifference) }</td>
           </tr>
         </tfoot>
         <tbody>
@@ -62,7 +64,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
    */
   renderRow(row: IResultRowProps) {
     return (
-      <ResultRow key={ `party-${ row.id }` } { ...row } />
+      <ResultRow key={ `party-${ row.id }` } {...row} />
     );
   }
 

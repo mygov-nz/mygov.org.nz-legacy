@@ -9,7 +9,7 @@ import history from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
 import store from './store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
-import * as selectors from './selectors';
+import { resultSelector } from './selectors';
 
 /**
  *
@@ -17,10 +17,11 @@ import * as selectors from './selectors';
  * @returns {{}}
  */
 function mapStateToProps(state) {
-  return {
-    year: state.year,
-    rows: selectors.dataSelector(state).parties
-  }
+  const props = resultSelector(state);
+
+  props.params = state;
+
+  return props;
 }
 
 /**

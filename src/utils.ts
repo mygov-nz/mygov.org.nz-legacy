@@ -1,18 +1,11 @@
 /**
  *
  * @param {number} value
+ * @param {string} prefix
  * @returns {string}
  */
-export function differenceClasses(value: number): string {
-  if (value > 0) {
-    return 'increase';
-  }
-
-  if (value < 0) {
-    return 'decrease';
-  }
-
-  return '';
+export function differenceClasses(value: number, prefix: string): string {
+  return value > 0 ? `${prefix}increase` : (value < 0 ? `${prefix}decrease` : '');
 }
 
 /**

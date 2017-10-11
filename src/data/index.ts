@@ -3,24 +3,6 @@ import parties from './parties';
 
 /**
  *
- * @param {IDataElectionRow} row
- * @return {IParty}
- */
-function expandRow(row: IDataElectionRow): IParty {
-    const id: string = row[0];
-    const party: IDataParty = parties[id];
-
-    return {
-        id,
-        name: party[0],
-        swatch: party[1],
-        votes: row[1],
-        electorates: row[2] || 0
-    };
-}
-
-/**
- *
  * @param {string} year
  * @returns {IElection}
  */
@@ -35,8 +17,16 @@ export function getData(year: string): IElection {
         totalVoters: data.t,
         enrolledVoters: data.e,
         activeVoters: data.v,
-        parties: data.r.map(expandRow)
+        parties: data.r
     };
+}
+
+/**
+ * 
+ * @return {IDataParty} [description]
+ */
+export function getParties(): IDataParty {
+  return parties;
 }
 
 /**
