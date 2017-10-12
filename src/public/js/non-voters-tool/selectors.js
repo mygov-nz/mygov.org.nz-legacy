@@ -71,7 +71,7 @@ export const resultSelector = createSelector(
     const rows = data.parties.map(row => {
       return {
         name: row[0],
-        votes: row[0] !== party ? row[1] : row[1] + allocate,
+        votes: row[0] !== party ? row[1] : row[1] + (allocate * votes / 100),
         electorates: row[2] || 0
       };
     });
@@ -79,13 +79,13 @@ export const resultSelector = createSelector(
     if (party === constants.PARTY_NEW) {
       rows.push({
         name: constants.PARTY_NEW,
-        votes: allocate,
+        votes: allocate * votes / 100,
         electorates: 0
       });
     } else if (party === constants.PARTY_NEW_NO_LIST) {
       rows.push({
         name: constants.PARTY_NEW_NO_LIST,
-        votes: allocate,
+        votes: allocate * votes / 100,
         electorates: 0,
         listSize: 0
       });

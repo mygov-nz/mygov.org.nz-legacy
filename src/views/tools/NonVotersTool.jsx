@@ -1,4 +1,5 @@
 import * as React from "react";
+import Slider from 'react-rangeslider';
 import ResultTable from "./widgets/ResultTable";
 import { getYears } from "data";
 import * as constants from 'public/js/non-voters-tool/constants';
@@ -48,11 +49,17 @@ class NonVotersTool extends React.PureComponent {
             </label>
             <label className="col-sm-12 col-xl form-group custom-rangeslider" htmlFor="votes">
               <span className="input-label">Percentage</span>
-              <input type="hidden" id="votes" name="votes" step="5" max="100" min="0" required value={this.props.params.votes} onChange={this.props.handlers.setVotes} />
-              <div className="rangeslider">
-                <div className="fill" style={{ width: `${this.props.params.votes}%` }}></div>
-                <div className="handle" style={{ left: `${this.props.params.votes}%` }}>{this.props.params.votes}%</div>
-              </div>
+              <input type="hidden" id="votes" name="votes" defaultValue={this.props.params.votes} />
+              <Slider
+                handleLabel={`${this.props.params.votes}%`}
+                max={100}
+                min={0}
+                onChange={this.props.handlers.setVotes}
+                orientation={'horizontal'}
+                step={5}
+                tooltip={false}
+                value={this.props.params.votes}
+              />
             </label>
           </form>
         </div>

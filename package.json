@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",
-    "aws-sdk": "^2.131.0",
+    "aws-sdk": "^2.132.0",
     "babel-core": "^7.0.0-beta.2",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
@@ -48,7 +48,7 @@
     "reselect": "^3.0.1",
     "serverless": "^1.23.0",
     "serverless-gulp": "^1.0.10",
-    "webpack": "^3.6.0",
+    "webpack": "^3.7.1",
     "webpack-stream": "^4.0.0"
   }
 }

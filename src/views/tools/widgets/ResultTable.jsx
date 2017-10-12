@@ -39,7 +39,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
             <td className="d-none d-sm-table-cell">{ this.props.totalElectorateSeats }</td>
             <td>{ this.props.totalListSeats }</td>
             <td>{ this.props.totalSeats }</td>
-            <td className={ differenceClasses(this.props.seatDifference) }>{ differenceValue(this.props.seatDifference) }</td>
+            <td className={ differenceClasses(this.props.seatDifference) }>{ differenceValue(this.props.seatDifference, 0) }</td>
           </tr>
           <tr>
             <td className="d-none d-sm-table-cell" colSpan="2">&nbsp;</td>

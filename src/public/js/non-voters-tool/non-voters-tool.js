@@ -35,7 +35,7 @@ function mapDispatchToProps(dispatch) {
     handlers: {
       setParty: event => dispatch(actions.setParty(event.target.value)),
       setUnenrolled: event => dispatch(actions.setUnenrolled(event.target.checked)),
-      setVotes: event => dispatch(actions.setVotes(event.target.value)),
+      setVotes: value => dispatch(actions.setVotes(value)),
       setYear: event => dispatch(actions.setYear(event.target.value))
     }
   };

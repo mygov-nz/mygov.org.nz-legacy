@@ -37,31 +37,41 @@
     height: 1rem;
     margin-top: 1rem;
     position: relative;
-
-    .fill {
-      background-color: rgba(0, 0, 0, .1);
-      border-radius: 1px;
-      height: 100%;
-      top: 0;
-    }
-
-    .handle {
-      background-color: $white;
-      border: 1px solid rgba(0, 0, 0, .2);
-      border-radius: $btn-border-radius-sm;
-      color: $gray-700;
-      cursor: pointer;
-      display: inline-block;
-      height: 2.375rem;
-      line-height: 1;
-      margin-left: -2rem;
-      padding: .625rem 0;
-      position: absolute;
-      text-align: center;
-      top: -.5rem;
-      width: 4rem;
-    }
+    touch-action: none;
   }
+
+  .rangeslider__fill {
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 1px;
+    height: 100%;
+    top: 0;
+  }
+
+  .rangeslider__handle {
+    background-color: $white;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: $btn-border-radius-sm;
+    color: $gray-700;
+    cursor: pointer;
+    display: inline-block;
+    height: 2.375rem;
+    line-height: 1;
+    margin-left: -2rem;
+    padding: .625rem 0;
+    position: absolute;
+    text-align: center;
+    top: -.6875rem;
+    width: 4rem;
+  }
+
+  .rangeslider__handle:active {
+    outline: 0 none;
+  }
+
+  .rangeslider__labels {
+    display: none;
+  }
+
 }
 
 @include media-breakpoint-up(sm) {
