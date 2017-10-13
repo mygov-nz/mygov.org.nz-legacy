@@ -1,7 +1,8 @@
 .result-table {
   text-align: right;
 
-  th {
+  th,
+  tfoot {
     font-weight: $font-weight-bold;
   }
 

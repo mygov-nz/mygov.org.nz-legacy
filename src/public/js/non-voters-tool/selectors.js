@@ -67,11 +67,12 @@ export const resultSelector = createSelector(
     const parties = getParties();
     const original = sainteLague(data.parties.map(forSainteLague), params);
 
-    const allocate = unenrolled ? (data.totalVoters - data.activeVoters) : (data.enrolledVoters - data.activeVoters);
+    const allocate = Math.round((unenrolled ? (data.totalVoters - data.activeVoters) : (data.enrolledVoters - data.activeVoters)) * votes / 100);
+
     const rows = data.parties.map(row => {
       return {
         name: row[0],
-        votes: row[0] !== party ? row[1] : row[1] + (allocate * votes / 100),
+        votes: row[0] !== party ? row[1] : row[1] + allocate,
         electorates: row[2] || 0
       };
     });
@@ -79,13 +80,13 @@ export const resultSelector = createSelector(
     if (party === constants.PARTY_NEW) {
       rows.push({
         name: constants.PARTY_NEW,
-        votes: allocate * votes / 100,
+        votes: allocate,
         electorates: 0
       });
     } else if (party === constants.PARTY_NEW_NO_LIST) {
       rows.push({
         name: constants.PARTY_NEW_NO_LIST,
-        votes: allocate * votes / 100,
+        votes: allocate,
         electorates: 0,
         listSize: 0
       });

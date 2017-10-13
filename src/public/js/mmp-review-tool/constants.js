@@ -1,4 +1,5 @@
 // Events
+export const LOAD_STATE = 'mygov/mmp-review-tool/load-state';
 export const SET_OVERHANG = 'mygov/mmp-review-tool/set-overhang';
 export const SET_TAG_ALONG = 'mygov/mmp-review-tool/set-tag-along';
 export const SET_TAG_ALONG_SEATS = 'mygov/mmp-review-tool/set-tag-along-seats';

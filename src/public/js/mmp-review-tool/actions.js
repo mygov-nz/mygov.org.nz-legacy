@@ -1,6 +1,19 @@
 import * as constants from './constants';
 
 /**
+ * Loads the starting state
+ *
+ * @param {object} state
+ * @returns {{ type: string, state: object }}
+ */
+export function loadState(state) {
+  return {
+    type: constants.LOAD_STATE,
+    state
+  };
+}
+
+/**
  * Sets overhang value
  *
  * @param {bool} overhang

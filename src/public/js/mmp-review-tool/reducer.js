@@ -17,6 +17,9 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
 
+    case constants.LOAD_STATE:
+      return Object.assign({}, state, action.state);
+
     case constants.SET_OVERHANG:
       return Object.assign({}, state, {
         overhang: action.overhang

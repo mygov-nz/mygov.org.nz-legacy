@@ -16,6 +16,9 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
 
+    case constants.LOAD_STATE:
+      return Object.assign({}, state, action.state);
+
     case constants.SET_PARTY:
       return Object.assign({}, state, {
         party: action.id

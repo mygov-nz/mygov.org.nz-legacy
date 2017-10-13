@@ -1,4 +1,5 @@
 // Events
+export const LOAD_STATE = 'mygov/non-voters-tool/load-state';
 export const SET_PARTY = 'mygov/non-voters-tool/set-party';
 export const SET_UNENROLLED = 'mygov/non-voters-tool/set-unenrolled';
 export const SET_VOTES = 'mygov/non-voters-tool/set-votes';

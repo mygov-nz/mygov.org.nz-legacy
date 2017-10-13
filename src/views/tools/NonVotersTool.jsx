@@ -42,12 +42,12 @@ class NonVotersTool extends React.PureComponent {
                 </optgroup>
               </select>
             </label>
-            <label className="d-none d-md-block col-md-4 col-xl form-group custom-control custom-checkbox" htmlFor="unenrolled">
+            {/* <label className="d-none d-md-block col-md-4 col-xl form-group custom-control custom-checkbox" htmlFor="unenrolled">
               <span className="input-label">Include unenrolled voters</span>
               <input type="checkbox" className="custom-control-input" id="unenrolled" name="unenrolled" value="on" checked={this.props.params.unenrolled} onChange={this.props.handlers.setUnenrolled} />
               <span className="custom-control-indicator"></span>
-            </label>
-            <label className="col-sm-12 col-xl form-group custom-rangeslider" htmlFor="votes">
+            </label> */}
+            <label className="col-sm-12 col-md-4 col-xl form-group custom-rangeslider" htmlFor="votes">
               <span className="input-label">Percentage</span>
               <input type="hidden" id="votes" name="votes" defaultValue={this.props.params.votes} />
               <Slider

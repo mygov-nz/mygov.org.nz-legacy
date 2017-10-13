@@ -2,7 +2,7 @@ const elections: IDataElection = {
 
     "2017": {
         t: 3569830,
-        e: 3569830,
+        e: 3298009,
         v: 2630173,
         r: [
           ["nat", 1152075, 41],

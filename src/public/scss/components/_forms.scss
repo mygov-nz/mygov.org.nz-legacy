@@ -41,7 +41,7 @@
   }
 
   .rangeslider__fill {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: $input-border-color;
     border-radius: 1px;
     height: 100%;
     top: 0;
@@ -49,7 +49,7 @@
 
   .rangeslider__handle {
     background-color: $white;
-    border: 1px solid rgba(0, 0, 0, .2);
+    border: 1px solid $input-border-color;
     border-radius: $btn-border-radius-sm;
     color: $gray-700;
     cursor: pointer;
@@ -62,10 +62,15 @@
     text-align: center;
     top: -.6875rem;
     width: 4rem;
+    user-select: none;
   }
 
-  .rangeslider__handle:active {
+  .rangeslider__handle:focus {
     outline: 0 none;
+  }
+
+  .rangeslider__handle-label {
+    pointer-events: none;
   }
 
   .rangeslider__labels {
