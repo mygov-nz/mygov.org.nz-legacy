@@ -29,7 +29,7 @@ exports.view = (req, res) => {
     overhang: false,
     tagAlong: false,
     tagAlongSeats: 1,
-    threshold: 4,
+    threshold: 2,
     year: '2017'
   };
 
@@ -46,12 +46,16 @@ exports.view = (req, res) => {
 
   const layoutProps = {
     cdn: 'http://localhost:3000',
+    nav: 'tools/mmp-review',
     title: 'MMP Review Tool - MyGov',
-    description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.'
+    description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.',
+    scripts: [
+      '/js/mmp-review-tool.js'
+    ]
   };
 
   const view = React.createElement(MMPReviewTool, props);
   const layout = React.createElement(Layout, layoutProps, view);
 
-  res.send('<!DOCTYPE html>' + ReactDOM.renderToString(layout));
+  res.send('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout));
 };

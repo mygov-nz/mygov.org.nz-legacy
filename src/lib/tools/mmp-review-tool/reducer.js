@@ -4,7 +4,7 @@ const initialState = {
   overhang: false,
   tagAlong: false,
   tagAlongSeats: 1,
-  threshold: 4,
+  threshold: 2,
   year: '2017'
 };
 

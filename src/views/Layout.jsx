@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
 /**
  *
@@ -45,10 +46,10 @@ class Layout extends React.PureComponent {
                         <a className="nav-link" href="#">Home</a>
                       </li> */}
                       <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="/tools" id="navbar-tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
+                        <a className={classNames('nav-link dropdown-toggle', { active: this.props.nav === 'tools' })} href="/tools" id="navbar-tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-tools">
-                          <a className="dropdown-item active" href="#">MMP Review Tool</a>
-                          <a className="dropdown-item" href="#">Non-voters Tool</a>
+                          <a className={classNames('dropdown-item', { active: this.props.nav === 'tools/mmp-review' })} href="/tools/mmp-review">MMP Review Tool</a>
+                          <a className={classNames('dropdown-item', { active: this.props.nav === 'tools/non-voters' })} href="/tools/non-voters">Non-voters Tool</a>
                         </div>
                       </li>
                     </ul>
@@ -64,9 +65,9 @@ class Layout extends React.PureComponent {
                 <a href="https://mygov.org.nz">mygov.org.nz</a>
               </footer>
 
+              <script src={`${cdn}/js/behaviour.js`}></script>
+              {this.props.scripts.map(src => <script key={src} src={cdn + src} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
-              <script src={`${cdn}/js/behaviour.js`} async></script>
-              <script src={`${cdn}/js/mmp-review-tool.js`} async></script>
               <script src="http://google-analytics.com/analytics.js" async defer></script>
           </body>
       </html>

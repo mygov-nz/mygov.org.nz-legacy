@@ -22,10 +22,16 @@ app.get('/tools', (req, res) => {
   res.send('Tools');
 });
 
-app.get('/tools/mmp-review', require('./src/handlers/mmp-review-tool').view);
+app.get('/tools/mmp-review/:hash', require('./src/handlers/mmp-review-tool').view);
+
+app.get('/tools/mmp-review', (req, res) => {
+  res.redirect('/tools/mmp-review/MjAxNCwwLjA1LDEsMSwx');
+});
+
+app.get('/tools/non-voters/:hash', require('./src/handlers/non-voters-tool').view);
 
 app.get('/tools/non-voters', (req, res) => {
-  res.send('Non-voters Tool');
+  res.redirect('/tools/non-voters/MjAxNCxAbm8sMS4wMDAwLDA=');
 });
 
 app.listen(3000, () => {
