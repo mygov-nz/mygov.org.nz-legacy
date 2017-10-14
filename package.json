@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",
-    "aws-sdk": "^2.132.0",
+    "aws-sdk": "^2.133.0",
     "babel-core": "^7.0.0-beta.2",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",

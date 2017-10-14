@@ -1,10 +1,10 @@
 import * as constants from './constants';
 
 const initialState = {
-  overhang: true,
-  tagAlong: true,
+  overhang: false,
+  tagAlong: false,
   tagAlongSeats: 1,
-  threshold: 5,
+  threshold: 4,
   year: '2017'
 };
 

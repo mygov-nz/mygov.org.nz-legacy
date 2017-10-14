@@ -14,6 +14,11 @@ class NonVotersTool extends React.PureComponent {
    * @returns {JSX.Element}
    */
   render() {
+    const parties = this.props.rows
+      .map(party => { return { id: party.id, name: party.name }; })
+      .filter(party => party.id.slice(0, 1) !== '@')
+      .sort((a, b) => a.name > b.name ? 1 : -1);
+
     return (
       <main className="container-fluid">
 
@@ -38,7 +43,7 @@ class NonVotersTool extends React.PureComponent {
                 <option value={constants.PARTY_NEW}>{constants.PARTY_NAMES[constants.PARTY_NEW]}</option>
                 <option value={constants.PARTY_NEW_NO_LIST}>{constants.PARTY_NAMES[constants.PARTY_NEW_NO_LIST]}</option>
                 <optgroup label="Political parties">
-                  { this.props.rows.map(row => <option key={row.id} value={row.id}>{row.name}</option>) }
+                  { parties.map(row => <option key={row.id} value={row.id}>{row.name}</option>) }
                 </optgroup>
               </select>
             </label>
