@@ -4,7 +4,7 @@ import { differenceClasses, differenceValue } from "utils";
 /**
  *
  */
-class ResultRow extends React.PureComponent {
+class ComparisonRow extends React.PureComponent {
 
   /**
    *
@@ -28,4 +28,4 @@ class ResultRow extends React.PureComponent {
 
 }
 
-export default ResultRow;
+export default ComparisonRow;

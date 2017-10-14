@@ -1,5 +1,5 @@
 import * as React from "react";
-import ResultTable from "./widgets/ResultTable";
+import ComparisonTable from "views/widgets/ComparisonTable";
 import { getYears } from "data";
 
 /**
@@ -53,7 +53,7 @@ class MMPReviewTool extends React.PureComponent {
           </form>
         </div>
 
-        <ResultTable {...this.props} />
+        <ComparisonTable {...this.props} />
 
       </main>
     );

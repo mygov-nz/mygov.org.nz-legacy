@@ -1,11 +1,11 @@
 import * as React from "react";
-import ResultRow from "./ResultRow";
+import ComparisonRow from "./ComparisonRow";
 import { differenceClasses, differenceValue, roundFloat } from "utils";
 
 /**
  *
  */
-class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
+class ComparisonTable extends React.PureComponent {
 
   /**
    *
@@ -13,7 +13,7 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
    */
   render() {
     return (
-      <table className="table result-table">
+      <table className="table comparison-table">
         <colgroup>
           <col width="35%" />
           <col className="d-none d-sm-table-cell" width="13%" />
@@ -57,15 +57,15 @@ class ResultTable extends React.PureComponent<IResultTableProps, undefined> {
 
   /**
    *
-   * @param {IResultRow} row
+   * @param {object} row
    * @returns {JSX.Element}
    */
-  renderRow(row: IResultRowProps) {
+  renderRow(row) {
     return (
-      <ResultRow key={ `party-${ row.id }` } {...row} />
+      <ComparisonRow key={ `party-${ row.id }` } {...row} />
     );
   }
 
 }
 
-export default ResultTable;
+export default ComparisonTable;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Slider from 'react-rangeslider';
-import ResultTable from "./widgets/ResultTable";
+import ComparisonTable from "views/widgets/ComparisonTable";
 import { getYears } from "data";
 import * as constants from 'public/js/non-voters-tool/constants';
 
@@ -69,7 +69,7 @@ class NonVotersTool extends React.PureComponent {
           </form>
         </div>
 
-        <ResultTable {...this.props} />
+        <ComparisonTable {...this.props} />
 
       </main>
     );
