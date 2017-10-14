@@ -1,16 +1,16 @@
 'use strict';
 
+import history from 'history/createBrowserHistory';
+import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 import { hydrate } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import history from 'history/createBrowserHistory';
-import PropTypes from 'prop-types';
-import store from './store';
+import * as actions from 'lib/tools/mmp-review-tool/actions';
+import { resultSelector } from 'lib/tools/mmp-review-tool/selectors';
+import store from 'lib/tools/mmp-review-tool/store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
-import { resultSelector } from './selectors';
-import * as actions from './actions';
 
 /**
  *
