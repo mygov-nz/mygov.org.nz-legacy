@@ -1,13 +1,14 @@
 'use strict';
 
-require('babel-register');
+require('babel-register')({
+  extensions: [".js", ".jsx", ".ts", ".tsx"],
+  ignore: [/node_modules/],
+  only: [/src/]
+});
 
 const express = require('express');
 const React = require('react');
 const ReactDOM = require('react-dom/server');
-
-const MMPReviewTool = require('./src/views/tools/MMPReviewTool');
-const NonVotersTool = require('./src/views/tools/NonVotersTool');
 
 const app = express();
 
@@ -21,16 +22,10 @@ app.get('/tools', (req, res) => {
   res.send('Tools');
 });
 
-app.get('/tools/mmp-review', (req, res) => {
-  res.send('MMP Review Tool');
-});
+app.get('/tools/mmp-review', require('./src/handlers/mmp-review-tool').view);
 
 app.get('/tools/non-voters', (req, res) => {
-  const element = '';
-
-  res.send('<!DOCTYPE html>');
-  res.send(ReactDOM.renderToString(element));
-  res.end();
+  res.send('Non-voters Tool');
 });
 
 app.listen(3000, () => {

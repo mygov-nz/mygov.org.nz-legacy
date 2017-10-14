@@ -1,8 +1,8 @@
-import { createSelector, defaultMemoize } from 'reselect';
-import { getData, getParties } from 'data';
 import gallagher from 'gallagher';
+import { createSelector, defaultMemoize } from 'reselect';
 import sainteLague from 'saintelague';
 import * as constants from './constants';
+import { getData, getParties } from '../../../data';
 
 const params = {
   overhang: true,

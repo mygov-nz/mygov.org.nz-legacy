@@ -16,8 +16,8 @@ class Layout extends React.PureComponent {
       <html className="no-js" lang="en-NZ">
           <head>
               <title>{this.props.title}</title>
-              <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="ie=edge" />
+              <meta charSet="utf-8" />
+              <meta httpEquiv="x-ua-compatible" content="ie=edge" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta name="description" content={this.props.description} />
               <meta name="theme-color" content="#f89828" />
@@ -64,9 +64,9 @@ class Layout extends React.PureComponent {
                 <a href="https://mygov.org.nz">mygov.org.nz</a>
               </footer>
 
-              <script>window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')</script>
+              <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
               <script src={`${cdn}/js/behaviour.js`} async></script>
-              <script src={`${cdn}/js/non-voters-tool.js`} async></script>
+              <script src={`${cdn}/js/mmp-review-tool.js`} async></script>
               <script src="http://google-analytics.com/analytics.js" async defer></script>
           </body>
       </html>

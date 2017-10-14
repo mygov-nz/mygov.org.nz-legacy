@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ComparisonTable from 'views/widgets/ComparisonTable';
-import { getYears } from 'data';
+import { getYears } from '../../data';
+import ComparisonTable from '../widgets/ComparisonTable';
 
 /**
  *

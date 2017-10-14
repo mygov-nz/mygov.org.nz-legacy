@@ -1,7 +1,7 @@
-import { createSelector, defaultMemoize } from 'reselect';
-import { getData, getParties } from 'data';
 import gallagher from 'gallagher';
+import { createSelector, defaultMemoize } from 'reselect';
 import sainteLague from 'saintelague';
+import { getData, getParties } from '../../../data';
 
 const overhangSelector = state => state.overhang;
 const tagAlongSelector = state => state.tagAlong;

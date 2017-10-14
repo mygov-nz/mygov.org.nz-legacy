@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Slider from 'react-rangeslider';
-import { getYears } from 'data';
-import * as constants from 'lib/tools/non-voters-tool/constants';
-import ComparisonTable from 'views/widgets/ComparisonTable';
+import { getYears } from '../../data';
+import * as constants from '../../lib/tools/non-voters-tool/constants';
+import ComparisonTable from '../widgets/ComparisonTable';
 
 /**
  *

@@ -30,7 +30,9 @@ module.exports = {
         query: {
           presets: [
             /* ['env', {
-              //
+              "targets": {
+                "browsers": ["last 2 versions", "ie >= 11"]
+              }
             }], */
             'react',
             'typescript'

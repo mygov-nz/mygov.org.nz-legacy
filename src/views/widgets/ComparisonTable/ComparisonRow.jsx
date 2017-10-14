@@ -1,5 +1,5 @@
 import * as React from "react";
-import { differenceClasses, differenceValue } from "utils";
+import { differenceClasses, differenceValue } from "../../../utils";
 
 /**
  *
