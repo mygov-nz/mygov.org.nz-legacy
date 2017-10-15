@@ -7,7 +7,17 @@ module.exports = {
   entry: {
     behaviour: './src/public/js/behaviour.js',
     'mmp-review-tool': './src/public/js/mmp-review-tool.js',
-    'non-voters-tool': './src/public/js/non-voters-tool.js'
+    'non-voters-tool': './src/public/js/non-voters-tool.js',
+    vendor: [
+      'gallagher',
+      'prop-types',
+      'react',
+      'react-dom',
+      'react-redux',
+      'redux',
+      'reselect',
+      'saintelague'
+    ]
   },
   output: {
     filename: '[name].js',
@@ -45,7 +55,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('development')
       }
     }),
     new webpack.LoaderOptionsPlugin({
@@ -60,10 +70,11 @@ module.exports = {
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Collapse: "exports-loader?Util!bootstrap/js/dist/collapse",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
-    })
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common'
-    // }),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
     /* new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       comments: false,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import ComparisonRow from "./ComparisonRow";
-import { differenceClasses, differenceValue, roundFloat } from "../../../utils";
+import { differenceClasses, differenceValue, roundFloat } from "../../utils";
 
 /**
  *

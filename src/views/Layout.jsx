@@ -65,6 +65,7 @@ class Layout extends React.PureComponent {
                 <a href="https://mygov.org.nz">mygov.org.nz</a>
               </footer>
 
+              <script src={`${cdn}/js/vendor.js`}></script>
               <script src={`${cdn}/js/behaviour.js`}></script>
               {this.props.scripts.map(src => <script key={src} src={cdn + src} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
