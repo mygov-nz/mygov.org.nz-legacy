@@ -21,7 +21,7 @@
     "babel-core": "^7.0.0-beta.3",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^2.0.0-beta.2",
     "babel-preset-react": "^7.0.0-beta.3",
     "babel-preset-typescript": "^7.0.0-beta.3",
     "babel-register": "^7.0.0-beta.3",

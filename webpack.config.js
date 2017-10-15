@@ -1,7 +1,49 @@
 'use strict';
 
+const debug = process.env.NODE_ENV !== 'production';
+
 const path = require('path');
 const webpack = require('webpack');
+
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(debug ? 'development' : 'production')
+    }
+  }),
+  new webpack.LoaderOptionsPlugin({
+    minimize: !debug,
+    debug: debug
+  }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
+    Popper: ['popper.js', 'default'],
+    Util: "exports-loader?Util!bootstrap/js/dist/util",
+    Collapse: "exports-loader?Util!bootstrap/js/dist/collapse",
+    Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: Infinity
+  })
+];
+
+if (!debug) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    beautify: false,
+    comments: false,
+    compress: {
+      screw_ie8: true,
+      warnings: false
+    },
+    mangle: {
+      keep_fnames: true,
+      screw_ie8: true
+    }
+  }));
+}
 
 module.exports = {
   entry: {
@@ -46,11 +88,11 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: [
-            /* ['env', {
+            ['env', {
               "targets": {
                 "browsers": ["last 2 versions", "ie >= 11"]
               }
-            }], */
+            }],
             'react',
             'typescript'
           ]
@@ -59,40 +101,5 @@ module.exports = {
     ]
   },
   target: 'web',
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: false,
-      debug: true
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],
-      Util: "exports-loader?Util!bootstrap/js/dist/util",
-      Collapse: "exports-loader?Util!bootstrap/js/dist/collapse",
-      Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity
-    }),
-    /* new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      comments: false,
-      compress: {
-        screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        keep_fnames: true,
-        screw_ie8: true
-      }
-    }) */
-  ]
+  plugins: plugins
 };
