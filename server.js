@@ -31,7 +31,7 @@ app.get('/tools/mmp-review', (req, res) => {
 app.get('/tools/non-voters/:hash', require('./src/handlers/non-voters-tool').view);
 
 app.get('/tools/non-voters', (req, res) => {
-  res.redirect('/tools/non-voters/MjAxNCxAbm8sMS4wMDAwLDA=');
+  res.redirect('/tools/non-voters/MjAxNyxAbncsNTAsMA==');
 });
 
 app.listen(3000, () => {

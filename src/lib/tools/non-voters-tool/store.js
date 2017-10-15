@@ -1,14 +1,13 @@
+import createHistory from 'history/createBrowserHistory';
 import { createStore } from 'redux';
 import * as constants from './constants';
+import { hashToParams, paramsToHash } from './utils';
 
-const initialState = {
-  party: '@nw',
-  unenrolled: false,
-  votes: 50,
-  year: '2017'
-};
+const history = createHistory({
+  basename: '/tools/non-voters/'
+});
 
-const store = createStore((state = initialState, action) => {
+const store = createStore((state = {}, action) => {
   switch (action.type) {
 
     case constants.LOAD_STATE:
@@ -38,5 +37,33 @@ const store = createStore((state = initialState, action) => {
 
   return state;
 });
+
+store.subscribe(() => {
+  const state = store.getState();
+  const hash = paramsToHash(state);
+
+  if (hash !== history.location.pathname.slice(1)) {
+    history.push(hash, state);
+  }
+});
+
+history.listen((location, action) => {
+  if (location.state === undefined) {
+    return;
+  }
+
+  if (action !== 'POP' && action !== 'REPLACE') {
+    return;
+  }
+
+  store.dispatch({
+    type: constants.LOAD_STATE,
+    state: location.state
+  });
+});
+
+const hash = history.location.pathname.slice(1);
+
+history.replace(hash, hashToParams(hash));
 
 export default store;

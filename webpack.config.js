@@ -10,13 +10,20 @@ module.exports = {
     'non-voters-tool': './src/public/js/non-voters-tool.js',
     vendor: [
       'gallagher',
+      'history/createBrowserHistory',
       'prop-types',
       'react',
       'react-dom',
       'react-redux',
       'redux',
       'reselect',
-      'saintelague'
+      'saintelague',
+      './src/data/index',
+      './src/data/parties',
+      './src/data/elections',
+      './src/views/Layout',
+      './src/views/utils',
+      './src/views/widgets/ComparisonTable',
     ]
   },
   output: {
