@@ -48,7 +48,7 @@ function mapDispatchToProps(dispatch) {
 const Root = ({ store }) => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Route path='/tools/mmp-review/:hash' component={connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool)} />
+      <Route path='/tools/mmp-review/:token' component={connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool)} />
     </ConnectedRouter>
   </Provider>
 );
