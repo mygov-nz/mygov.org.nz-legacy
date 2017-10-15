@@ -23,7 +23,7 @@ export function hashToParams(hash) {
   return {
     year: (-1 < years.indexOf(params[0])) ? params[0] : '2017',
     threshold: (0 <= threshold && 100 >= threshold) ? threshold : 5,
-    allowOverhang: !!parseInt(params[2], 10),
+    overhang: !!parseInt(params[2], 10),
     tagAlong: !!parseInt(params[3], 10),
     tagAlongSeats: (0 <= tagAlongSeats && 120 >= tagAlongSeats) ? tagAlongSeats : 1
   };
@@ -39,7 +39,7 @@ export function paramsToHash(params) {
   return btoa([
     params.year,
     params.threshold,
-    params.allowOverhang ? 0 : 1,
+    params.overhang ? 0 : 1,
     params.tagAlong ? 0 : 1,
     params.tagAlongSeats
   ].join(','));
