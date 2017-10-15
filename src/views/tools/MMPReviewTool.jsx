@@ -5,7 +5,7 @@ import ComparisonTable from '../widgets/ComparisonTable';
 /**
  *
  */
-class MMPReviewTool extends React.PureComponent {
+class MMPReviewTool extends React.Component {
 
   /**
    *
@@ -63,6 +63,23 @@ class MMPReviewTool extends React.PureComponent {
 
       </main>
     );
+  }
+
+  /**
+   * [shouldComponentUpdate description]
+   *
+   * @param  {{ params: {} }} nextProps [description]
+   * @return bool
+   */
+  shouldComponentUpdate(nextProps) {
+    const params = this.props.params;
+    const nextParams = nextProps.params;
+
+    return nextParams.overhang !== params.overhang
+      || nextParams.tagAlong !== params.tagAlong
+      || nextParams.tagAlongSeats !== params.tagAlongSeats
+      || nextParams.threshold !== params.threshold
+      || nextParams.year !== params.year;
   }
 
 }

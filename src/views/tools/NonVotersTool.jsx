@@ -7,7 +7,7 @@ import ComparisonTable from '../widgets/ComparisonTable';
 /**
  *
  */
-class NonVotersTool extends React.PureComponent {
+class NonVotersTool extends React.Component {
 
   /**
    *
@@ -78,6 +78,22 @@ class NonVotersTool extends React.PureComponent {
 
       </main>
     );
+  }
+
+  /**
+   * [shouldComponentUpdate description]
+   *
+   * @param  {{ params: {} }} nextProps [description]
+   * @return bool
+   */
+  shouldComponentUpdate(nextProps) {
+    const params = this.props.params;
+    const nextParams = nextProps.params;
+
+    return nextParams.party !== params.party
+      || nextParams.unenrolled !== params.unenrolled
+      || nextParams.votes !== params.votes
+      || nextParams.year !== params.year;
   }
 
 }

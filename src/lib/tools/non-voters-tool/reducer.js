@@ -1,3 +1,5 @@
+import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux';
 import * as constants from './constants';
 
 const initialState = {
@@ -13,7 +15,7 @@ const initialState = {
  * @param {{ type: string }} action
  * @returns {{}}
  */
-export default function reducer(state = initialState, action) {
+function paramReducer(state = initialState, action) {
   switch (action.type) {
 
     case constants.LOAD_STATE:
@@ -43,3 +45,8 @@ export default function reducer(state = initialState, action) {
 
   return state;
 }
+
+export default combineReducers({
+  params: paramReducer,
+  router: routerReducer
+});

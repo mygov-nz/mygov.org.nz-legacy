@@ -21,18 +21,12 @@ const ReactDOM = require('react-dom/server');
 import { resultSelector } from '../lib/tools/mmp-review-tool/selectors';
 import Layout from '../views/Layout';
 import MMPReviewTool from '../views/tools/MMPReviewTool';
+import { hashToParams } from '../lib/tools/mmp-review-tool/utils';
 
 const noop = () => {};
 
 exports.view = (req, res) => {
-  const state = {
-    overhang: false,
-    tagAlong: false,
-    tagAlongSeats: 1,
-    threshold: 2,
-    year: '2017'
-  };
-
+  const state = hashToParams(req.params.hash);
   const props = resultSelector(state);
 
   props.params = state;

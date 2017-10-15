@@ -62,7 +62,7 @@ class ComparisonTable extends React.PureComponent {
    */
   renderRow(row) {
     return (
-      <ComparisonRow key={ `party-${ row.id }` } {...row} />
+      <ComparisonRow key={row.id} {...row} />
     );
   }
 

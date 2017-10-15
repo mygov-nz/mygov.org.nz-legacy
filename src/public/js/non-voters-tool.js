@@ -1,13 +1,13 @@
 'use strict';
 
-import history from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 import { hydrate } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import { Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import * as actions from 'lib/tools/non-voters-tool/actions';
+import history from 'lib/tools/non-voters-tool/history';
 import { resultSelector } from 'lib/tools/non-voters-tool/selectors';
 import store from 'lib/tools/non-voters-tool/store';
 import NonVotersTool from 'views/tools/NonVotersTool';
@@ -18,9 +18,9 @@ import NonVotersTool from 'views/tools/NonVotersTool';
  * @returns {{}}
  */
 function mapStateToProps(state) {
-  const props = resultSelector(state);
+  const props = resultSelector(state.params);
 
-  props.params = state;
+  props.params = state.params;
 
   return props;
 }
@@ -46,9 +46,9 @@ function mapDispatchToProps(dispatch) {
  */
 const Root = ({ store }) => (
   <Provider store={store}>
-    <BrowserRouter history={history}>
+    <ConnectedRouter history={history}>
       <Route exact component={connect(mapStateToProps, mapDispatchToProps)(NonVotersTool)} />
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>
 );
 

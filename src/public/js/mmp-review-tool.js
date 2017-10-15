@@ -1,13 +1,13 @@
 'use strict';
 
-import history from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 import { hydrate } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import { Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import * as actions from 'lib/tools/mmp-review-tool/actions';
+import history from 'lib/tools/mmp-review-tool/history';
 import { resultSelector } from 'lib/tools/mmp-review-tool/selectors';
 import store from 'lib/tools/mmp-review-tool/store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
@@ -18,9 +18,9 @@ import MMPReviewTool from 'views/tools/MMPReviewTool';
  * @returns {{}}
  */
 function mapStateToProps(state) {
-  const props = resultSelector(state);
+  const props = resultSelector(state.params);
 
-  props.params = state;
+  props.params = state.params;
 
   return props;
 }
@@ -47,9 +47,9 @@ function mapDispatchToProps(dispatch) {
  */
 const Root = ({ store }) => (
   <Provider store={store}>
-    <BrowserRouter history={history}>
-      <Route exact component={connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool)} />
-    </BrowserRouter>
+    <ConnectedRouter history={history}>
+      <Route path='/tools/mmp-review/:hash' component={connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool)} />
+    </ConnectedRouter>
   </Provider>
 );
 

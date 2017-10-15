@@ -2,30 +2,22 @@ import * as React from "react";
 import { differenceClasses, differenceValue } from "../../../utils";
 
 /**
+ * [ComparisonRow description]
  *
+ * @param {[type]} props [description]
  */
-class ComparisonRow extends React.PureComponent {
-
-  /**
-   *
-   * @returns {JSX.Element}
-   */
-  render() {
-    return (
-      <tr className={ this.props.totalSeats ? 'success' : '' }>
-        <th scope="row">
-          { this.props.name }
-          <span className="swatch d-none d-sm-block" style={{ background: `#${ this.props.swatch }` }}></span>
-        </th>
-        <td className="d-none d-sm-table-cell">{ this.props.votes.toLocaleString() }</td>
-        <td className="d-none d-sm-table-cell">{ this.props.electorateSeats }</td>
-        <td>{ this.props.listSeats }</td>
-        <td>{ this.props.totalSeats }</td>
-        <td className={ differenceClasses(this.props.seatDifference) }>{ differenceValue(this.props.seatDifference, 0) }</td>
-      </tr>
-    );
-  }
-
-}
+const ComparisonRow = props => (
+  <tr className={ props.totalSeats ? 'success' : '' }>
+    <th scope="row">
+      { props.name }
+      <span className="swatch d-none d-sm-block" style={{ background: `#${ props.swatch }` }} />
+    </th>
+    <td className="d-none d-sm-table-cell">{ props.votes.toLocaleString() }</td>
+    <td className="d-none d-sm-table-cell">{ props.electorateSeats }</td>
+    <td>{ props.listSeats }</td>
+    <td>{ props.totalSeats }</td>
+    <td className={ differenceClasses(props.seatDifference) }>{ differenceValue(props.seatDifference, 0) }</td>
+  </tr>
+);
 
 export default ComparisonRow;
