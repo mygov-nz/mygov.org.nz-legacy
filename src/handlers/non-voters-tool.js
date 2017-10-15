@@ -3,17 +3,12 @@ const ReactDOM = require('react-dom/server');
 import { resultSelector } from '../lib/tools/non-voters-tool/selectors';
 import Layout from '../views/Layout';
 import NonVotersTool from '../views/tools/NonVotersTool';
+import { hashToParams } from '../lib/tools/non-voters-tool/utils';
 
 const noop = () => {};
 
 exports.view = (req, res) => {
-  const state = {
-    party: '@nw',
-    unenrolled: false,
-    votes: 50,
-    year: '2017'
-  };
-
+  const state = hashToParams(req.params.hash);
   const props = resultSelector(state);
 
   props.params = state;
