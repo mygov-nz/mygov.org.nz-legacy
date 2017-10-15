@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 import { hydrate } from 'react-dom';
 import { connect, Provider } from 'react-redux';
-import { Route } from 'react-router';
-import { ConnectedRouter } from 'react-router-redux';
 import * as actions from 'lib/tools/non-voters-tool/actions';
-import history from 'lib/tools/non-voters-tool/history';
 import { resultSelector } from 'lib/tools/non-voters-tool/selectors';
 import store from 'lib/tools/non-voters-tool/store';
 import NonVotersTool from 'views/tools/NonVotersTool';
@@ -18,9 +15,9 @@ import NonVotersTool from 'views/tools/NonVotersTool';
  * @returns {{}}
  */
 function mapStateToProps(state) {
-  const props = resultSelector(state.params);
+  const props = resultSelector(state);
 
-  props.params = state.params;
+  props.params = state;
 
   return props;
 }
@@ -41,14 +38,15 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+
+const App = connect(mapStateToProps, mapDispatchToProps)(NonVotersTool);
+
 /**
  *
  */
 const Root = ({ store }) => (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Route exact component={connect(mapStateToProps, mapDispatchToProps)(NonVotersTool)} />
-    </ConnectedRouter>
+    <App />
   </Provider>
 );
 

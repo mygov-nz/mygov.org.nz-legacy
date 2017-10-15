@@ -1,3 +1,5 @@
+import atob from 'atob';
+import btoa from 'btoa';
 import { getYears } from '../../../data';
 
 const years = getYears();
@@ -11,7 +13,12 @@ const years = getYears();
 export function hashToParams(hash) {
   const params = atob(hash).split(',');
   const tagAlongSeats = parseInt(params[4], 10);
-  const threshold = parseInt(params[1], 10);
+
+  let threshold = parseFloat(params[1]);
+  if (0 < threshold && 1 > threshold) {
+    threshold = threshold * 100;
+  }
+  threshold = Math.round(threshold);
 
   return {
     year: (-1 < years.indexOf(params[0])) ? params[0] : '2017',

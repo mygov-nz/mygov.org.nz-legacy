@@ -25,7 +25,7 @@ app.get('/tools', (req, res) => {
 app.get('/tools/mmp-review/:hash', require('./src/handlers/mmp-review-tool').view);
 
 app.get('/tools/mmp-review', (req, res) => {
-  res.redirect('/tools/mmp-review/MjAxNCwwLjA1LDEsMSwx');
+  res.redirect('/tools/mmp-review/MjAxNywyLDAsMCwx');
 });
 
 app.get('/tools/non-voters/:hash', require('./src/handlers/non-voters-tool').view);

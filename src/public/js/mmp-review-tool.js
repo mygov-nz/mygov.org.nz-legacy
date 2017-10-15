@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import React, { createElement } from 'react';
 import { hydrate } from 'react-dom';
 import { connect, Provider } from 'react-redux';
-import { Route } from 'react-router';
-import { ConnectedRouter } from 'react-router-redux';
 import * as actions from 'lib/tools/mmp-review-tool/actions';
-import history from 'lib/tools/mmp-review-tool/history';
 import { resultSelector } from 'lib/tools/mmp-review-tool/selectors';
 import store from 'lib/tools/mmp-review-tool/store';
 import MMPReviewTool from 'views/tools/MMPReviewTool';
@@ -18,9 +15,9 @@ import MMPReviewTool from 'views/tools/MMPReviewTool';
  * @returns {{}}
  */
 function mapStateToProps(state) {
-  const props = resultSelector(state.params);
+  const props = resultSelector(state);
 
-  props.params = state.params;
+  props.params = state;
 
   return props;
 }
@@ -42,14 +39,14 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+const App = connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool);
+
 /**
  *
  */
 const Root = ({ store }) => (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Route path='/tools/mmp-review/:token' component={connect(mapStateToProps, mapDispatchToProps)(MMPReviewTool)} />
-    </ConnectedRouter>
+    <App />
   </Provider>
 );
 
