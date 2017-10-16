@@ -1,26 +1,8 @@
-'use strict';
-
-import PropTypes from 'prop-types';
-import React, { createElement } from 'react';
-import { hydrate } from 'react-dom';
-import { connect, Provider } from 'react-redux';
+import render from 'lib/tools/common/render';
 import * as actions from 'lib/tools/non-voters-tool/actions';
 import { resultSelector } from 'lib/tools/non-voters-tool/selectors';
 import store from 'lib/tools/non-voters-tool/store';
 import NonVotersTool from 'views/tools/NonVotersTool';
-
-/**
- *
- * @param {{}} state
- * @returns {{}}
- */
-function mapStateToProps(state) {
-  const props = resultSelector(state);
-
-  props.params = state;
-
-  return props;
-}
 
 /**
  *
@@ -38,22 +20,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-const App = connect(mapStateToProps, mapDispatchToProps)(NonVotersTool);
-
-/**
- *
- */
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
-
-Root.propTypes = {
-  store: PropTypes.object.isRequired
-};
-
-hydrate(createElement(Root, {
-  store: store
-}), document.getElementById('content'));
+render(MMPReviewTool, store, resultSelector, mapDispatchToProps);

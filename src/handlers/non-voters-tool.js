@@ -1,9 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom/server');
+import React from 'react';
+import ReactDOM from 'react-dom/server';
 import { resultSelector } from '../lib/tools/non-voters-tool/selectors';
+import { hashToParams } from '../lib/tools/non-voters-tool/utils';
 import Layout from '../views/Layout';
 import NonVotersTool from '../views/tools/NonVotersTool';
-import { hashToParams } from '../lib/tools/non-voters-tool/utils';
 
 const noop = () => {};
 
@@ -32,5 +32,10 @@ exports.view = (req, res) => {
   const view = React.createElement(NonVotersTool, props);
   const layout = React.createElement(Layout, layoutProps, view);
 
+  if ('production' === process.env.NODE_ENV) {
+    res.set('Cache-Control', 'max-age=86400');
+  }
+
+  res.set('Link', '<https://mygov.org.nz/tools/non-voters>; rel="canonical"');
   res.send('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout));
 };

@@ -91,7 +91,7 @@ class NonVotersTool extends React.Component {
     const nextParams = nextProps.params;
 
     return nextParams.party !== params.party
-      || nextParams.unenrolled !== params.unenrolled
+      // || nextParams.unenrolled !== params.unenrolled
       || nextParams.votes !== params.votes
       || nextParams.year !== params.year;
   }

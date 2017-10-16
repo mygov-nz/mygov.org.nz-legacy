@@ -1,49 +1,13 @@
 import gallagher from 'gallagher';
-import { createSelector, defaultMemoize } from 'reselect';
+import { createSelector } from 'reselect';
 import sainteLague from 'saintelague';
 import { getData, getParties } from '../../../data';
+import { forGallagher, forSainteLague, rowReducer, yearSelector } from '../common/selectors';
 
 const overhangSelector = state => state.overhang;
 const tagAlongSelector = state => state.tagAlong;
 const tagAlongSeatsSelector = state => state.tagAlongSeats;
 const thresholdSelector = state => state.threshold;
-const yearSelector = state => state.year;
-
-/**
- * Converts data into correct format for Gallagher
- *
- * @param  {object} party
- * @return {object}
- */
-const forGallagher = party => {
-  return {
-    name: party.name,
-    votes: party.votes,
-    seats: party.allocated
-  };
-};
-
-/**
- * Converts data into correct format for Sainté Lague
- *
- * @param  {object} party
- * @return {object}
- */
-const forSainteLague = party => {
-  return {
-    name: party[0],
-    votes: party[1],
-    electorates: party[2] || 0
-  };
-};
-
-/**
- * //
- *
- * @param  {string} field
- * @return {Function}
- */
-const rowReducer = defaultMemoize(field => (total, row) => total + row[field]);
 
 /**
  * Calculation selector

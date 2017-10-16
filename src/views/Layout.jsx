@@ -14,7 +14,7 @@ class Layout extends React.PureComponent {
     const cdn = this.props.cdn;
 
     return (
-      <html className="no-js" lang="en-NZ">
+      <html lang="en-NZ">
           <head>
               <title>{this.props.title}</title>
               <meta charSet="utf-8" />

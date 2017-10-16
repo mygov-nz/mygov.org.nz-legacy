@@ -39,7 +39,6 @@ if (!debug) {
       warnings: false
     },
     mangle: {
-      keep_fnames: true,
       screw_ie8: true
     }
   }));
@@ -51,7 +50,6 @@ module.exports = {
     'mmp-review-tool': './src/public/js/mmp-review-tool.js',
     'non-voters-tool': './src/public/js/non-voters-tool.js',
     vendor: [
-      'gallagher',
       'history/createBrowserHistory',
       'prop-types',
       'react',
@@ -60,11 +58,10 @@ module.exports = {
       'redux',
       'reselect',
       'saintelague',
-      './src/data/index',
-      './src/data/parties',
-      './src/data/elections',
+      './src/data',
+      './src/lib/tools/common/render',
+      './src/lib/tools/common/selectors',
       './src/views/Layout',
-      './src/views/utils',
       './src/views/widgets/ComparisonTable',
     ]
   },

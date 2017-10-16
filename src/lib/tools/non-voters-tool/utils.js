@@ -22,7 +22,8 @@ export function hashToParams(hash) {
 
   return {
     party: (years[params[1]] !== undefined) ? params[1] : '@nw',
-    unenrolled: !!parseInt(params[3], 10),
+    // unenrolled: !!parseInt(params[3], 10),
+    unenrolled: false,
     votes: (0 <= votes && 100 >= votes) ? votes : 50,
     year: (-1 < years.indexOf(params[0])) ? params[0] : '2017',
   };
@@ -39,6 +40,7 @@ export function paramsToHash(params) {
     params.year,
     params.party,
     params.votes,
-    params.unenrolled ? 1 : 0
+    // params.unenrolled ? 1 : 0
+    0
   ].join(','));
 }
