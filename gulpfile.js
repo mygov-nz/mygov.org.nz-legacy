@@ -58,7 +58,10 @@ gulp.task('css', ['clean'], () => {
   ];
 
   if (!debug) {
-    plugins.push(cssnano());
+    plugins.push(cssnano({
+      autoprefixer: false,
+      discardComments: { removeAll: true }
+    }));
   }
 
   return gulp.src('src/public/scss/style.scss')
