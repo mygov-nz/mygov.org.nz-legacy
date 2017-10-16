@@ -5,9 +5,9 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    global: './src/handlers/global.js',
-    'mmp-review-tool': './src/handlers/mmp-review-tool.js',
-    'non-voters-tool': './src/handlers/non-voters-tool.js'
+    global: './handlers/global.js',
+    'mmp-review-tool': './handlers/mmp-review-tool.js',
+    'non-voters-tool': './handlers/non-voters-tool.js'
   },
   output: {
     filename: '[name].js',
@@ -16,8 +16,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
-      'src',
-      'node_modules'
+      './',
+      './node_modules'
     ]
   },
   module: {

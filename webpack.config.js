@@ -46,9 +46,9 @@ if (!debug) {
 
 module.exports = {
   entry: {
-    behaviour: './src/public/js/behaviour.js',
-    'mmp-review-tool': './src/public/js/mmp-review-tool.js',
-    'non-voters-tool': './src/public/js/non-voters-tool.js',
+    behaviour: './public/js/behaviour.js',
+    'mmp-review-tool': './public/js/mmp-review-tool.js',
+    'non-voters-tool': './public/js/non-voters-tool.js',
     vendor: [
       'history/createBrowserHistory',
       'prop-types',
@@ -58,11 +58,11 @@ module.exports = {
       'redux',
       'reselect',
       'saintelague',
-      './src/data',
-      './src/lib/tools/common/render',
-      './src/lib/tools/common/selectors',
-      './src/views/Layout',
-      './src/views/widgets/ComparisonTable',
+      './data',
+      './lib/tools/common/render',
+      './lib/tools/common/selectors',
+      './views/Layout',
+      './views/widgets/ComparisonTable',
     ]
   },
   output: {
@@ -72,12 +72,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
-      'src',
-      'node_modules'
+      './',
+      './node_modules'
     ],
     alias: {
-      atob$: path.resolve(__dirname, 'src/lib/tools/common/atob.js'),
-      btoa$: path.resolve(__dirname, 'src/lib/tools/common/btoa.js')
+      atob$: path.resolve(__dirname, 'lib/tools/common/atob.js'),
+      btoa$: path.resolve(__dirname, 'lib/tools/common/btoa.js')
     }
   },
   module: {

@@ -38,15 +38,15 @@ gulp.task('js', ['js-client', 'js-serverless', 'serverless-yml']);
  */
 gulp.task('copy', ['clean'], () => {
   return gulp.src([
-    'src/public/.well-known/apple-app-site-association',
-    'src/public/.well-known/assetlinks.json',
-    'src/public/apple-app-site-association',
-    'src/public/browserconfig.xml',
-    'src/public/crossdomain.xml',
-    'src/public/manifest.json',
-    'src/public/robots.txt',
-    'src/public/sitemap.xml'
-  ], { base: 'src/public' })
+    'public/.well-known/apple-app-site-association',
+    'public/.well-known/assetlinks.json',
+    'public/apple-app-site-association',
+    'public/browserconfig.xml',
+    'public/crossdomain.xml',
+    'public/manifest.json',
+    'public/robots.txt',
+    'public/sitemap.xml'
+  ], { base: 'public' })
     .pipe(gulp.dest('build/s3'));
 });
 
@@ -65,7 +65,7 @@ gulp.task('css', ['clean'], () => {
     }));
   }
 
-  return gulp.src('src/public/scss/style.scss')
+  return gulp.src('public/scss/style.scss')
     .pipe(sass({
       importer: (url, prev, done) => {
           if (url[0] !== '~') {
@@ -83,7 +83,7 @@ gulp.task('css', ['clean'], () => {
  * Images
  */
 gulp.task('images', ['clean'], () => {
-  return gulp.src('src/public/images.sketch')
+  return gulp.src('public/images.sketch')
     .pipe(sketch({
       clean: true,
       compact: true,
@@ -97,7 +97,7 @@ gulp.task('images', ['clean'], () => {
  * Client JS
  */
 gulp.task('js-client', ['clean'], () => {
-  return gulp.src('src/public/js/*.js')
+  return gulp.src('public/js/*.js')
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('build/s3/js'));
 });
@@ -106,15 +106,15 @@ gulp.task('js-client', ['clean'], () => {
  * Serverless JS
  */
 gulp.task('js-serverless', ['clean'], () => {
-  return gulp.src('src/handlers/*.js')
+  return gulp.src('handlers/*.js')
     .pipe(webpackStream(webpackConfigServerless, webpack))
     .pipe(gulp.dest('build/lambda'));
 });
 
 gulp.task('serverless-yml', ['clean'], () => {
   return gulp.src([
-    'src/serverless.yml'
-  ], { base: 'src' })
+    'serverless.yml'
+  ])
     .pipe(gulp.dest('build/lambda'));
 });
 

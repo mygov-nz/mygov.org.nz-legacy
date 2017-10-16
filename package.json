@@ -10,8 +10,7 @@
     "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
   },
   "scripts": {
-    "build": "gulp",
-    "start": "node ./server.js"
+    "build": "gulp"
   },
   "devDependencies": {
     "atob": "^2.0.3",
