@@ -12,6 +12,8 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const webpackStream = require('webpack-stream');
 
+const debug = process.env.NODE_ENV !== 'production';
+
 gulp.task('default', ['build']);
 gulp.task('build', ['clean', 'copy', 'css', 'images', 'js']);
 gulp.task('js', ['js-client']);
@@ -50,6 +52,14 @@ gulp.task('copy', ['clean'], () => {
  * CSS
  */
 gulp.task('css', ['clean'], () => {
+  const plugins = [
+    autoprefixer({ browsers: ['> 1%', 'ie >= 11'] })
+  ];
+
+  if (!debug) {
+    plugins.push(cssnano());
+  }
+
   return gulp.src('src/public/scss/style.scss')
     .pipe(sass({
       importer: (url, prev, done) => {
@@ -60,10 +70,7 @@ gulp.task('css', ['clean'], () => {
           done({ file: `./node_modules/${url.slice(1)}` });
       }
     }))
-    .pipe(postcss([
-      autoprefixer({ browsers: ['> 1%', 'ie >= 11'] }),
-      cssnano()
-    ]))
+    .pipe(postcss(plugins))
     .pipe(gulp.dest('build/s3/css'));
 });
 
