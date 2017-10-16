@@ -1,0 +1,24 @@
+.tool-list {
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    background-color: $link-color;
+    color: $white;
+    display: block;
+    font-size: 1.875rem;
+    margin: 0 0 .625rem;
+    padding: 3.75rem .3125rem;
+    text-align: center;
+    transition: background-color 300ms ease-out;
+  }
+
+  a:hover,
+  a:focus {
+    background-color: $link-hover-color;
+  }
+
+}

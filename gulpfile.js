@@ -54,7 +54,7 @@ gulp.task('copy', ['clean'], () => {
  */
 gulp.task('css', ['clean'], () => {
   const plugins = [
-    autoprefixer({ browsers: ['> 1%', 'ie >= 11'] })
+    autoprefixer({ browsers: ['last 2 versions', '> 1%', 'ie >= 11'] })
   ];
 
   if (!debug) {

@@ -75,7 +75,11 @@ module.exports = {
       'src',
       'src/node_modules',
       'node_modules'
-    ]
+    ],
+    alias: {
+      atob$: path.resolve(__dirname, 'src/lib/tools/common/atob.js'),
+      btoa$: path.resolve(__dirname, 'src/lib/tools/common/btoa.js')
+    }
   },
   module: {
     loaders: [
@@ -87,7 +91,7 @@ module.exports = {
           presets: [
             ['env', {
               "targets": {
-                "browsers": ["last 2 versions", "ie >= 11"]
+                "browsers": ["last 2 versions", "> 1%", "ie >= 11"]
               }
             }],
             'react',

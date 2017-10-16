@@ -18,9 +18,7 @@ app.get('/', (req, res) => {
   res.redirect('/tools');
 });
 
-app.get('/tools', (req, res) => {
-  res.send('Tools');
-});
+app.get('/tools', require('./src/handlers/global').tools);
 
 app.get('/tools/mmp-review/:hash', require('./src/handlers/mmp-review-tool').view);
 
