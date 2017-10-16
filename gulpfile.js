@@ -11,11 +11,12 @@ const sketch = require('gulp-sketch');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const webpackStream = require('webpack-stream');
+const workbox = require('workbox-build');
 
 const debug = process.env.NODE_ENV !== 'production';
 
 gulp.task('default', ['build']);
-gulp.task('build', ['clean', 'copy', 'css', 'images', 'js']);
+gulp.task('build', ['clean', 'copy', 'css', 'images', 'js', 'sw']);
 gulp.task('js', ['js-client']);
 
 /**
@@ -96,3 +97,20 @@ gulp.task('js-client', ['clean'], () => {
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('build/s3/js'));
 });
+
+/**
+ * Service Worker
+ */
+gulp.task('sw', ['css', 'js'], () => {
+   return workbox.generateSW({
+     globDirectory: './build/s3/',
+     swDest: './build/s3/sw.js',
+     globPatterns: ['**\/*.{js,css}']
+   })
+   .then(() => {
+     console.log('Service worker generated.');
+   })
+   .catch((err) => {
+     console.log('[ERROR] This happened: ' + err);
+   });
+ })

@@ -54,6 +54,7 @@
     "serverless": "^1.23.0",
     "serverless-gulp": "^1.0.10",
     "webpack": "^3.7.1",
-    "webpack-stream": "^4.0.0"
+    "webpack-stream": "^4.0.0",
+    "workbox-build": "^2.1.0"
   }
 }
