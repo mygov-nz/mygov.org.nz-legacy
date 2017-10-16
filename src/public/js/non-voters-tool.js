@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-render(MMPReviewTool, store, resultSelector, mapDispatchToProps);
+render(NonVotersTool, store, resultSelector, mapDispatchToProps);
