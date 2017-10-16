@@ -10,6 +10,7 @@ const sass = require('gulp-sass');
 const sketch = require('gulp-sketch');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
+const webpackConfigServerless = require('./webpack.config.serverless.js');
 const webpackStream = require('webpack-stream');
 const workbox = require('workbox-build');
 
@@ -17,7 +18,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 gulp.task('default', ['build']);
 gulp.task('build', ['clean', 'copy', 'css', 'images', 'js', 'sw']);
-gulp.task('js', ['js-client']);
+gulp.task('js', ['js-client', 'js-serverless', 'serverless-yml']);
 
 /**
  * Clean
@@ -99,6 +100,22 @@ gulp.task('js-client', ['clean'], () => {
   return gulp.src('src/public/js/*.js')
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('build/s3/js'));
+});
+
+/**
+ * Serverless JS
+ */
+gulp.task('js-serverless', ['clean'], () => {
+  return gulp.src('src/handlers/*.js')
+    .pipe(webpackStream(webpackConfigServerless, webpack))
+    .pipe(gulp.dest('build/lambda'));
+});
+
+gulp.task('serverless-yml', ['clean'], () => {
+  return gulp.src([
+    'src/serverless.yml'
+  ], { base: 'src' })
+    .pipe(gulp.dest('build/lambda'));
 });
 
 /**

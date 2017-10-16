@@ -11,14 +11,21 @@ import Tools from '../views/tools/Tools';
  * @param  {Function} callback Lambda response provider
  */
 exports.homepage = (event, context, callback) => {
-    callback(null, {
-        statusCode: 302,
-        headers: [
-            'Location: https://mygov.org.nz/tools'
-        ]
-    });
+  callback(null, {
+    statusCode: 302,
+    headers: [
+      'Location: https://mygov.org.nz/tools'
+    ]
+  });
 };
 
+/**
+ * [handler description]
+ *
+ * @param  {*}        event    API Gateway HTTP event
+ * @param  {*}        context  Lambda context
+ * @param  {Function} callback Lambda response provider
+ */
 exports.tools = (req, res) => {
   const layoutProps = {
     cdn: 'http://localhost:3000',
@@ -31,9 +38,12 @@ exports.tools = (req, res) => {
   const view = React.createElement(Tools);
   const layout = React.createElement(Layout, layoutProps, view);
 
-  if ('production' === process.env.NODE_ENV) {
-    res.set('Cache-Control', 'max-age=86400');
-  }
-
-  res.send('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout));
+  callback(null, {
+    statusCode: 200,
+    headers: [
+      'Cache-Control: max-age=' + ('production' !== process.env.NODE_ENV ? 1 : 86400),
+      'Content-Type: text/html; charset=utf-8'
+    ],
+    body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
+  });
 };

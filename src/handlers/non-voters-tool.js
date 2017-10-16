@@ -7,8 +7,31 @@ import NonVotersTool from '../views/tools/NonVotersTool';
 
 const noop = () => {};
 
-exports.view = (req, res) => {
-  const state = hashToParams(req.params.hash);
+/**
+ * [handler description]
+ *
+ * @param  {*}        event    API Gateway HTTP event
+ * @param  {*}        context  Lambda context
+ * @param  {Function} callback Lambda response provider
+ */
+exports.index = (event, context, callback) => {
+  callback(null, {
+    statusCode: 302,
+    headers: [
+      'Location: https://mygov.org.nz/tools/non-voters/MjAxNyxAbncsNTAsMA=='
+    ]
+  });
+};
+
+/**
+ * [handler description]
+ *
+ * @param  {*}        event    API Gateway HTTP event
+ * @param  {*}        context  Lambda context
+ * @param  {Function} callback Lambda response provider
+ */
+exports.view = (event, context, callback) => {
+  const state = hashToParams(event.pathParameters.hash);
   const props = resultSelector(state);
 
   props.params = state;
@@ -32,10 +55,13 @@ exports.view = (req, res) => {
   const view = React.createElement(NonVotersTool, props);
   const layout = React.createElement(Layout, layoutProps, view);
 
-  if ('production' === process.env.NODE_ENV) {
-    res.set('Cache-Control', 'max-age=86400');
-  }
-
-  res.set('Link', '<https://mygov.org.nz/tools/non-voters>; rel="canonical"');
-  res.send('<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout));
+  callback(null, {
+    statusCode: 200,
+    headers: [
+      'Cache-Control: max-age=' + ('production' !== process.env.NODE_ENV ? 1 : 86400),
+      'Content-Type: text/html; charset=utf-8',
+      'Link: <https://mygov.org.nz/tools/non-voters>; rel="canonical"'
+    ],
+    body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
+  });
 };

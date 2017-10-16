@@ -73,7 +73,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     modules: [
       'src',
-      'src/node_modules',
       'node_modules'
     ],
     alias: {

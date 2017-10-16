@@ -1,0 +1,54 @@
+service: mygov
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: production
+  memorySize: 128
+  timeout: 1
+
+functions:
+  homepage:
+    handler: global.homepage
+    events:
+      - http:
+          method: get
+          path: ''
+  tools:
+    handler: global.tools
+    events:
+      - http:
+          method: get
+          path: tools
+  mmp-review-tool-landing:
+    handler: mmp-review-tool.index
+    events:
+      - http:
+          method: get
+          path: tools/mmp-review
+  mmp-review-tool:
+    handler: mmp-review-tool.view
+    events:
+      - http:
+          method: get
+          path: tools/mmp-review/{hash}
+          request:
+            parameters:
+              paths:
+                hash: true
+  non-voters-tool-landing:
+    handler: non-voters-tool.index
+    events:
+      - http:
+          method: get
+          path: tools/non-voters
+  non-voters-tool:
+    handler: non-voters-tool.view
+    events:
+      - http:
+          method: get
+          path: tools/non-voters/{hash}
+          request:
+            parameters:
+              paths:
+                hash: true
