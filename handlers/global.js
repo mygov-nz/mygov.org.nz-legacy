@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Layout from '../views/Layout';
 import Tools from '../views/tools/Tools';
+import { addHeaders } from './utils';
 
 /**
  * [handler description]
@@ -31,8 +32,7 @@ exports.tools = (req, res) => {
     cdn: 'http://localhost:3000',
     nav: 'tools',
     title: 'MyGov Tools',
-    description: 'Tools',
-    scripts: []
+    description: 'Tools'
   };
 
   const view = React.createElement(Tools);
@@ -40,10 +40,7 @@ exports.tools = (req, res) => {
 
   callback(null, {
     statusCode: 200,
-    headers: [
-      'Cache-Control: max-age=' + ('production' !== process.env.NODE_ENV ? 1 : 86400),
-      'Content-Type: text/html; charset=utf-8'
-    ],
+    headers: addHeaders(),
     body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
   });
 };

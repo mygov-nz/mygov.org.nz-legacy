@@ -67,7 +67,7 @@ class Layout extends React.PureComponent {
 
               <script src={`${cdn}/js/vendor.js`}></script>
               <script src={`${cdn}/js/behaviour.js`}></script>
-              {this.props.scripts.map(src => <script key={src} src={cdn + src} />)}
+              {(this.props.scripts || []).map(src => <script key={src} src={cdn + src} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
               <script src="http://google-analytics.com/analytics.js" async defer></script>
               {/* <script dangerouslySetInnerHTML={{ __html: "if(navigator.serviceWorker){navigator.serviceWorker.register('/sw.js').catch(function(err){console.error('Unable to register service worker.',err)})}" }} /> */}

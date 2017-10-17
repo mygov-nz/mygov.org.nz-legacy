@@ -1,12 +1,15 @@
 'use strict';
 
+const AWS = require('aws-sdk');
 const autoprefixer = require('autoprefixer');
+const awspublish = require('gulp-awspublish');
 const cssnano = require('cssnano');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
 const rm = require('gulp-rm');
 const sass = require('gulp-sass');
+const serverlessGulp = require('serverless-gulp');
 const sketch = require('gulp-sketch');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
@@ -17,8 +20,8 @@ const workbox = require('workbox-build');
 const debug = process.env.NODE_ENV !== 'production';
 
 gulp.task('default', ['build']);
-gulp.task('build', ['clean', 'copy', 'css', 'images', 'js', 'sw']);
-gulp.task('js', ['js-client', 'js-serverless', 'serverless-yml']);
+gulp.task('build', ['copy', 'css', 'images', 'js-client', 'js-serverless', 'serverless-yml', 'sw']);
+gulp.task('deploy', ['s3', 'serverless']);
 
 /**
  * Clean
@@ -121,16 +124,49 @@ gulp.task('serverless-yml', ['clean'], () => {
 /**
  * Service Worker
  */
-gulp.task('sw', ['css', 'js'], () => {
-   return workbox.generateSW({
-     globDirectory: './build/s3/',
-     swDest: './build/s3/sw.js',
-     globPatterns: ['**\/*.{js,css}']
-   })
-   .then(() => {
-     console.log('Service worker generated.');
-   })
-   .catch((err) => {
-     console.log('[ERROR] This happened: ' + err);
-   });
- })
+gulp.task('sw', ['css', 'js-client'], () => {
+  return workbox.generateSW({
+    globDirectory: './build/s3/',
+    swDest: './build/s3/sw.js',
+    globPatterns: ['**\/*.{js,css}']
+  })
+  .then(() => {
+    console.log('Service worker generated.');
+  })
+  .catch(error => {
+    console.log(`[ERROR] ${error}`);
+  });
+})
+
+/**
+ * Upload to S3
+ */
+gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw'], () => {
+  const publisher = awspublish.create({
+    region: 'ap-southeast-2',
+    credentials: new AWS.SharedIniFileCredentials({ profile: 'mygov' }),
+    params: {
+      Bucket: debug ? 'cdn-dev.mygov.org.nz' : 'cdn.mygov.org.nz'
+    }
+  });
+
+  return gulp.src([
+      'build/s3/*',
+      'build/s3/**/*',
+      'build/s3/.*/*',
+      'build/s3/.*/**/*'
+    ], { base: 'build/s3' })
+    .pipe(awspublish.gzip({ ext: '.gz' }))
+    .pipe(publisher.publish())
+    .pipe(awspublish.reporter());
+});
+
+/**
+ * Serverless deploy
+ */
+gulp.task('serverless', ['js-serverless', 'serverless-yml'], () => {
+  gulp.src([
+    'serverless.yml'
+  ], { base: 'build/lambda', read: false })
+    .pipe(serverlessGulp.exec('deploy', { stage: debug ? 'development' : 'production' }));
+});

@@ -10,7 +10,8 @@
     "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
   },
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "deploy": "gulp deploy"
   },
   "devDependencies": {
     "atob": "^2.0.3",
@@ -56,7 +57,7 @@
     "saintelague": "^0.1.1",
     "serverless": "^1.23.0",
     "serverless-gulp": "^1.0.10",
-    "webpack": "^3.7.1",
+    "webpack": "^3.8.0",
     "webpack-stream": "^4.0.0",
     "workbox-build": "^2.1.0"
   }

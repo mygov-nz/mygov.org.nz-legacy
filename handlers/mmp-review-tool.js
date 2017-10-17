@@ -4,6 +4,7 @@ import { resultSelector } from '../lib/tools/mmp-review-tool/selectors';
 import { hashToParams } from '../lib/tools/mmp-review-tool/utils';
 import Layout from '../views/Layout';
 import MMPReviewTool from '../views/tools/MMPReviewTool';
+import { addHeaders } from './utils';
 
 const noop = () => {};
 
@@ -58,11 +59,9 @@ exports.view = (event, context, callback) => {
 
   callback(null, {
     statusCode: 200,
-    headers: [
-      'Cache-Control: max-age=' + ('production' !== process.env.NODE_ENV ? 1 : 86400),
-      'Content-Type: text/html; charset=utf-8',
-      'Link: <https://mygov.org.nz/tools/mmp-review>; rel="canonical"'
-    ],
+    headers: addHeaders({
+      Link: '<https://mygov.org.nz/tools/mmp-review>; rel="canonical"'
+    }),
     body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
   });
 };

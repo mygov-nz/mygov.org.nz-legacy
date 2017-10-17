@@ -4,6 +4,7 @@ import { resultSelector } from '../lib/tools/non-voters-tool/selectors';
 import { hashToParams } from '../lib/tools/non-voters-tool/utils';
 import Layout from '../views/Layout';
 import NonVotersTool from '../views/tools/NonVotersTool';
+import { addHeaders } from './utils';
 
 const noop = () => {};
 
@@ -57,11 +58,9 @@ exports.view = (event, context, callback) => {
 
   callback(null, {
     statusCode: 200,
-    headers: [
-      'Cache-Control: max-age=' + ('production' !== process.env.NODE_ENV ? 1 : 86400),
-      'Content-Type: text/html; charset=utf-8',
-      'Link: <https://mygov.org.nz/tools/non-voters>; rel="canonical"'
-    ],
+    headers: addHeaders({
+      Link: '<https://mygov.org.nz/tools/non-voters>; rel="canonical"'
+    }),
     body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
   });
 };
