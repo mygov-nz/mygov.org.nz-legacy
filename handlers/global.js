@@ -1,8 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/server';
-import Layout from '../views/Layout';
 import Tools from '../views/tools/Tools';
-import { addHeaders } from './utils';
+import { addHeaders, render } from './utils';
 
 /**
  * [handler description]
@@ -11,12 +8,12 @@ import { addHeaders } from './utils';
  * @param  {*}        context  Lambda context
  * @param  {Function} callback Lambda response provider
  */
-exports.homepage = (event, context, callback) => {
+module.exports.homepage = (event, context, callback) => {
   callback(null, {
     statusCode: 302,
-    headers: [
-      'Location: https://mygov.org.nz/tools'
-    ]
+    headers: {
+      Location: 'https://mygov.org.nz/tools'
+    }
   });
 };
 
@@ -27,20 +24,14 @@ exports.homepage = (event, context, callback) => {
  * @param  {*}        context  Lambda context
  * @param  {Function} callback Lambda response provider
  */
-exports.tools = (req, res) => {
-  const layoutProps = {
-    cdn: 'http://localhost:3000',
-    nav: 'tools',
-    title: 'MyGov Tools',
-    description: 'Tools'
-  };
-
-  const view = React.createElement(Tools);
-  const layout = React.createElement(Layout, layoutProps, view);
-
+module.exports.tools = (event, context, callback) => {
   callback(null, {
     statusCode: 200,
     headers: addHeaders(),
-    body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
+    body: render(Tools, {}, {
+      nav: 'tools',
+      title: 'MyGov Tools',
+      description: 'Tools'
+    })
   });
 };

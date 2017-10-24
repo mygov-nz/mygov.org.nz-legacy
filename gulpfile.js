@@ -126,8 +126,8 @@ gulp.task('serverless-yml', ['clean'], () => {
  */
 gulp.task('sw', ['css', 'js-client'], () => {
   return workbox.generateSW({
-    globDirectory: './build/s3/',
-    swDest: './build/s3/sw.js',
+    globDirectory: __dirname + '/build/s3/',
+    swDest: __dirname + '/build/s3/sw.js',
     globPatterns: ['**\/*.{js,css}']
   })
   .then(() => {
@@ -166,7 +166,7 @@ gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw'], () => {
  */
 gulp.task('serverless', ['js-serverless', 'serverless-yml'], () => {
   gulp.src([
-    'serverless.yml'
-  ], { base: 'build/lambda', read: false })
-    .pipe(serverlessGulp.exec('deploy', { stage: debug ? 'development' : 'production' }));
+    'build/lambda/serverless.yml'
+  ], { read: false })
+    .pipe(serverlessGulp.exec('deploy', { stage: debug ? 'dev' : 'prod' }));
 });

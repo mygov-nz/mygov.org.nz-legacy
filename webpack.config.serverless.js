@@ -3,6 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const debug = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   entry: {
     global: './handlers/global.js',
@@ -11,7 +13,8 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build/lambda')
+    path: path.resolve(__dirname, 'build/lambda'),
+    libraryTarget: 'commonjs'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -44,12 +47,12 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development')
+        NODE_ENV: JSON.stringify(debug ? 'development' : 'production')
       }
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: false,
-      debug: true
+      minimize: !debug,
+      debug: debug
     })
   ]
 };

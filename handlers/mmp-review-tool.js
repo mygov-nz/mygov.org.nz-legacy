@@ -1,10 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom/server';
 import { resultSelector } from '../lib/tools/mmp-review-tool/selectors';
 import { hashToParams } from '../lib/tools/mmp-review-tool/utils';
-import Layout from '../views/Layout';
 import MMPReviewTool from '../views/tools/MMPReviewTool';
-import { addHeaders } from './utils';
+import { addHeaders, render } from './utils';
 
 const noop = () => {};
 
@@ -15,12 +12,12 @@ const noop = () => {};
  * @param  {*}        context  Lambda context
  * @param  {Function} callback Lambda response provider
  */
-exports.index = (event, context, callback) => {
+module.exports.index = (event, context, callback) => {
   callback(null, {
     statusCode: 302,
-    headers: [
-      'Location: https://mygov.org.nz/tools/mmp-review/MjAxNywyLDAsMCwx'
-    ]
+    headers: {
+      Location: 'https://mygov.org.nz/tools/mmp-review/MjAxNywyLDAsMCwx'
+    }
   });
 };
 
@@ -31,7 +28,7 @@ exports.index = (event, context, callback) => {
  * @param  {*}        context  Lambda context
  * @param  {Function} callback Lambda response provider
  */
-exports.view = (event, context, callback) => {
+module.exports.view = (event, context, callback) => {
   const state = hashToParams(event.pathParameters.hash);
   const props = resultSelector(state);
 
@@ -44,24 +41,18 @@ exports.view = (event, context, callback) => {
     setYear: noop
   };
 
-  const layoutProps = {
-    cdn: 'http://localhost:3000',
-    nav: 'tools/mmp-review',
-    title: 'MMP Review Tool - MyGov',
-    description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.',
-    scripts: [
-      '/js/mmp-review-tool.js'
-    ]
-  };
-
-  const view = React.createElement(MMPReviewTool, props);
-  const layout = React.createElement(Layout, layoutProps, view);
-
   callback(null, {
     statusCode: 200,
     headers: addHeaders({
       Link: '<https://mygov.org.nz/tools/mmp-review>; rel="canonical"'
     }),
-    body: '<!DOCTYPE html>' + ReactDOM.renderToStaticMarkup(layout)
+    body: render(MMPReviewTool, props, {
+      nav: 'tools/mmp-review',
+      title: 'MMP Review Tool - MyGov',
+      description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.',
+      scripts: [
+        '/js/mmp-review-tool.js'
+      ]
+    })
   });
 };

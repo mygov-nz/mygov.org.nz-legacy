@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "atob": "^2.0.3",
-    "autoprefixer": "^7.1.5",
-    "aws-sdk": "^2.134.0",
+    "autoprefixer": "^7.1.6",
+    "aws-sdk": "^2.138.0",
     "babel-cli": "^7.0.0-beta.3",
     "babel-core": "^7.0.0-beta.3",
     "babel-loader": "^7.1.2",
@@ -25,7 +25,7 @@
     "babel-preset-react": "^7.0.0-beta.3",
     "babel-preset-typescript": "^7.0.0-beta.3",
     "babel-register": "^7.0.0-beta.3",
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "^4.0.0-beta.2",
     "btoa": "^1.1.2",
     "classnames": "^2.2.5",
     "concurrent-transform": "^1.0.0",
@@ -46,7 +46,7 @@
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
-    "popper.js": "^1.12.5",
+    "popper.js": "^1.12.6",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -57,7 +57,7 @@
     "saintelague": "^0.1.1",
     "serverless": "^1.23.0",
     "serverless-gulp": "^1.0.10",
-    "webpack": "^3.8.0",
+    "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0",
     "workbox-build": "^2.1.0"
   }
