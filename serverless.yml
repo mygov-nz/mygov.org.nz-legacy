@@ -1,5 +1,14 @@
 service: mygov
 
+custom:
+  stage: ${opt:stage, env:USER}
+  production:
+    bucket: cdn.mygov.org.nz
+    gateway: ladida
+  development:
+    bucket: cdn-dev.mygov.org.nz
+    gateway: ladida
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -9,23 +18,32 @@ provider:
   timeout: 300
   deploymentBucket:
     name: mygov-deploy
+  environment:
+    NODE_ENV: ${self:custom.stage}
+    API_GATEWAY: ${self:custom.${self:custom.stage}.gateway}
 
 package:
   individually: true
 
+plugins:
+   - serverless-plugin-cloudfront-lambda-edge
+
 functions:
+
   homepage:
     handler: global.homepage
     events:
       - http:
           method: get
           path: ''
+
   tools:
     handler: global.tools
     events:
       - http:
           method: get
           path: tools
+
   mmp-review-tool-landing:
     handler: mmp-review-tool.index
     events:
@@ -42,6 +60,7 @@ functions:
             parameters:
               paths:
                 hash: true
+
   non-voters-tool-landing:
     handler: non-voters-tool.index
     events:
@@ -58,3 +77,45 @@ functions:
             parameters:
               paths:
                 hash: true
+
+  cloudfront-request:
+    handler: cloudfront.request
+    lambdaAtEdge:
+      distribution: 'WebsiteDistribution'
+      eventType: 'origin-request'
+
+resources:
+  Resources:
+    WebsiteBucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        BucketName: '${self:custom.${self:custom.stage}.bucket}'
+        AccessControl: 'PublicRead'
+        WebsiteConfiguration:
+          IndexDocument: 'index.html'
+          ErrorDocument: 'error.html'
+    WebsiteDistribution:
+      Type: 'AWS::CloudFront::Distribution'
+      Properties:
+        DistributionConfig:
+          DefaultCacheBehavior:
+            TargetOriginId: 'WebsiteBucketOrigin'
+            ViewerProtocolPolicy: 'redirect-to-https'
+            DefaultTTL: 600 # ten minutes
+            MaxTTL: 600 # ten minutes
+            Compress: true
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: 'none'
+            DefaultRootObject: 'index.html'
+            Enabled: true
+            PriceClass: 'PriceClass_100'
+            HttpVersion: 'http2'
+            ViewerCertificate:
+              CloudFrontDefaultCertificate: true
+            Origins:
+               -
+                  Id: 'WebsiteBucketOrigin'
+                  DomainName: { 'Fn::GetAtt': [ 'WebsiteBucket', 'DomainName' ] }
+                  S3OriginConfig: {}

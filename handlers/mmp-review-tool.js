@@ -6,7 +6,7 @@ import { addHeaders, render } from './utils';
 const noop = () => {};
 
 /**
- * [handler description]
+ * MMP Review Tool redirect
  *
  * @param  {*}        event    API Gateway HTTP event
  * @param  {*}        context  Lambda context
@@ -22,7 +22,7 @@ module.exports.index = (event, context, callback) => {
 };
 
 /**
- * [handler description]
+ * MMP Review Tool
  *
  * @param  {*}        event    API Gateway HTTP event
  * @param  {*}        context  Lambda context

@@ -7,6 +7,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
+    cloudfront: './handlers/cloudfront.js',
     global: './handlers/global.js',
     'mmp-review-tool': './handlers/mmp-review-tool.js',
     'non-voters-tool': './handlers/non-voters-tool.js'
@@ -45,11 +46,6 @@ module.exports = {
   },
   target: 'node',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(debug ? 'development' : 'production')
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: !debug,
       debug: debug
