@@ -16,7 +16,7 @@
   "devDependencies": {
     "atob": "^2.0.3",
     "autoprefixer": "^7.1.6",
-    "aws-sdk": "^2.138.0",
+    "aws-sdk": "^2.143.0",
     "babel-cli": "^7.0.0-beta.3",
     "babel-core": "^7.0.0-beta.3",
     "babel-loader": "^7.1.2",
@@ -55,10 +55,11 @@
     "redux": "^3.7.2",
     "reselect": "^3.0.1",
     "saintelague": "^0.1.1",
-    "serverless": "^1.23.0",
+    "serverless": "^1.24.0",
     "serverless-gulp": "^1.0.10",
+    "serverless-plugin-cloudfront-lambda-edge": "1.0.0",
     "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0",
-    "workbox-build": "^2.1.0"
+    "workbox-build": "^2.1.1"
   }
 }
