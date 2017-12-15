@@ -25,7 +25,7 @@ module.exports = {
     ]
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(j|t)sx?$/,
         loader: 'babel-loader',
@@ -37,8 +37,7 @@ module.exports = {
                 "node": "6.10.3"
               }
             }],
-            'react',
-            'typescript'
+            'react'
           ]
         }
       }

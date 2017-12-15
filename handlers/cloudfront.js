@@ -26,6 +26,10 @@ function useLambda(url) {
 module.exports.request = (event, context, callback) => {
   const req = event.Records[0].cf.request;
 
+  if (req.method !== 'GET') {
+    req.method = 'GET';
+  }
+
   if (useLambda(req.uri)) {
     req.headers.host.value = process.env.API_GATEWAY;
   }

@@ -141,12 +141,12 @@ gulp.task('sw', ['css', 'js-client'], () => {
 /**
  * Upload to S3
  */
-gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw'], () => {
+gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw', 'serverless'], () => {
   const publisher = awspublish.create({
-    region: 'ap-southeast-2',
+    region: 'us-east-1',
     credentials: new AWS.SharedIniFileCredentials({ profile: 'mygov' }),
     params: {
-      Bucket: debug ? 'cdn-dev.mygov.org.nz' : 'cdn.mygov.org.nz'
+      Bucket: debug ? 'mygov-dev-website' : 'mygov-website'
     }
   });
 
@@ -165,7 +165,7 @@ gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw'], () => {
  * Serverless deploy
  */
 gulp.task('serverless', ['js-serverless', 'serverless-yml'], () => {
-  gulp.src([
+  return gulp.src([
     'build/lambda/serverless.yml'
   ], { read: false })
     .pipe(serverlessGulp.exec('deploy', { stage: debug ? 'dev' : 'prod' }));
