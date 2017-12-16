@@ -10,13 +10,16 @@
     "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
   },
   "scripts": {
-    "build": "gulp",
-    "deploy": "gulp deploy"
+    "build:dev": "npm run clean && gulp",
+    "build:prod": "npm run clean && NODE_ENV=production gulp",
+    "clean": "rm -rf build",
+    "deploy:dev": "npm run clean && gulp deploy",
+    "deploy:prod": "npm run clean && NODE_ENV=production gulp deploy"
   },
   "devDependencies": {
     "atob": "^2.0.3",
     "autoprefixer": "^7.2.3",
-    "aws-sdk": "^2.170.0",
+    "aws-sdk": "^2.171.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
