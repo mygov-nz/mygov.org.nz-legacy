@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-const app = require('../app');
-const debug = require('debug')('tmp:server');
+const app = require('../build').default;
 const http = require('http');
 
-const server = http.createServer(app);
-
-server.listen('3000');
+http.createServer(app).listen('3000');
