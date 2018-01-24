@@ -1,8 +1,12 @@
 import express from 'express';
 import path from 'path';
+import render from './lib/render';
 import routes from './routes';
 
 const app = express();
+
+app.engine('react', render);
+app.set('view engine', 'render');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);

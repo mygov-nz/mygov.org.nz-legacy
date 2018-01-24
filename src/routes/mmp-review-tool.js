@@ -1,6 +1,7 @@
 import { resultSelector } from '../lib/tools/mmp-review-tool/selectors';
 import { hashToParams } from '../lib/tools/mmp-review-tool/utils';
-import MMPReviewTool from '../views/tools/MMPReviewTool';
+
+const noop = () => null;
 
 /**
  * MMP Review Tool
@@ -25,6 +26,17 @@ export function mmpReviewTool(req, res) {
   };
 
   res.set(headers);
+  res.render('tools/MMPReviewTool', {
+    layout: {
+      nav: 'tools/mmp-review',
+      title: 'MMP Review Tool - MyGov',
+      description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.',
+      scripts: [
+        '/js/mmp-review-tool.js'
+      ]
+    },
+    props
+  });
 }
 
 /**
