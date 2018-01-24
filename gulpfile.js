@@ -7,7 +7,7 @@ const cssnano = require('cssnano');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
-const rm = require('gulp-rm');
+const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const serverlessGulp = require('serverless-gulp');
 const sketch = require('gulp-sketch');
@@ -21,25 +21,11 @@ const debug = process.env.NODE_ENV !== 'production';
 
 gulp.task('default', ['build']);
 gulp.task('build', ['copy', 'css', 'images', 'js-client', 'js-serverless', 'serverless-yml', 'sw']);
-gulp.task('deploy', ['s3', 'serverless']);
-
-/**
- * Clean
- */
- gulp.task('clean', () => {
-   return gulp.src([
-       'build/*',
-       'build/**/*',
-       'build/.*/*',
-       'build/.*/**/*'
-     ], { read: false })
-     .pipe(rm());
- });
 
 /**
  * Copy
  */
-gulp.task('copy', ['clean'], () => {
+gulp.task('copy', () => {
   return gulp.src([
     'public/.well-known/apple-app-site-association',
     'public/.well-known/assetlinks.json',
@@ -56,7 +42,7 @@ gulp.task('copy', ['clean'], () => {
 /**
  * CSS
  */
-gulp.task('css', ['clean'], () => {
+gulp.task('css', () => {
   const plugins = [
     autoprefixer({ browsers: ['last 2 versions', '> 1%', 'ie >= 11'] })
   ];
@@ -85,7 +71,7 @@ gulp.task('css', ['clean'], () => {
 /**
  * Images
  */
-gulp.task('images', ['clean'], () => {
+gulp.task('images', () => {
   return gulp.src('public/images.sketch')
     .pipe(sketch({
       clean: true,
@@ -99,7 +85,7 @@ gulp.task('images', ['clean'], () => {
 /**
  * Client JS
  */
-gulp.task('js-client', ['clean'], () => {
+gulp.task('js-client', () => {
   return gulp.src('public/js/*.js')
     .pipe(webpackStream(webpackConfig, webpack))
     .pipe(gulp.dest('build/s3/js'));
@@ -108,13 +94,32 @@ gulp.task('js-client', ['clean'], () => {
 /**
  * Serverless JS
  */
-gulp.task('js-serverless', ['clean'], () => {
-  return gulp.src('handlers/*.js')
+gulp.task('js-serverless', () => {
+  return gulp.src([
+      'handlers/*.js',
+      '!handlers/cloudfront.js'
+    ])
     .pipe(webpackStream(webpackConfigServerless, webpack))
     .pipe(gulp.dest('build/lambda'));
 });
 
-gulp.task('serverless-yml', ['clean'], () => {
+/**
+ * Serverless Cloudfront
+ */
+gulp.task('cloudfront-serverless', () => {
+  return gulp.src(['handlers/cloudfront.js'])
+    .pipe(replace('process.env.API_GATEWAY',
+      debug
+      ? '\'https://caacg06zfk.execute-api.us-east-1.amazonaws.com/dev/\''
+      : '\'https://magbc9i13e.execute-api.us-east-1.amazonaws.com/prod/\''
+    ))
+    .pipe(gulp.dest('build/lambda'));
+});
+
+/**
+ * Serverless YML
+ */
+gulp.task('serverless-yml', () => {
   return gulp.src([
     'serverless.yml'
   ])
@@ -141,7 +146,7 @@ gulp.task('sw', ['css', 'js-client'], () => {
 /**
  * Upload to S3
  */
-gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw', 'serverless'], () => {
+gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw'], () => {
   const publisher = awspublish.create({
     region: 'us-east-1',
     credentials: new AWS.SharedIniFileCredentials({ profile: 'mygov' }),
@@ -156,15 +161,16 @@ gulp.task('s3', ['copy', 'css', 'images', 'js-client', 'sw', 'serverless'], () =
       'build/s3/.*/*',
       'build/s3/.*/**/*'
     ], { base: 'build/s3' })
-    .pipe(awspublish.gzip({ ext: '.gz' }))
+    // .pipe(awspublish.gzip({ ext: '.gz' }))
     .pipe(publisher.publish())
+    // .pipe(publisher.sync())
     .pipe(awspublish.reporter());
 });
 
 /**
  * Serverless deploy
  */
-gulp.task('serverless', ['js-serverless', 'serverless-yml'], () => {
+gulp.task('serverless', ['js-serverless', 'cloudfront-serverless', 'serverless-yml'], () => {
   return gulp.src([
     'build/lambda/serverless.yml'
   ], { read: false })
