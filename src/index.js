@@ -1,9 +1,12 @@
 import express from 'express';
 import path from 'path';
+import middleware from './lib/middleware';
 import render from './lib/render';
 import routes from './routes';
 
 const app = express();
+
+middleware(app);
 
 app.engine('react', render);
 app.set('view engine', 'render');

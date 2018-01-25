@@ -3,37 +3,46 @@ import btoa from 'btoa';
 import { getYears } from '../../../data';
 
 const years = getYears();
+const hashMap = {};
 
 /**
- * [hashToParams description]
+ * Deserialise hash into a param object
  *
- * @param  {[type]} hash [description]
- * @return {[type]}      [description]
+ * @param  {string} hash
+ * @return {{}}
  */
 export function hashToParams(hash) {
-  const params = atob(hash).split(',');
-  const tagAlongSeats = parseInt(params[4], 10);
+  if (hashMap[hash]) {
+    return hashMap[hash];
+  }
 
-  let threshold = parseFloat(params[1]);
+  const bits = atob(hash).split(',');
+  const tagAlongSeats = parseInt(bits[4], 10);
+
+  let threshold = parseFloat(bits[1]);
   if (0 < threshold && 1 > threshold) {
     threshold = threshold * 100;
   }
   threshold = Math.round(threshold);
 
-  return {
-    year: (-1 < years.indexOf(params[0])) ? params[0] : '2017',
+  const params = {
+    year: (-1 < years.indexOf(bits[0])) ? bits[0] : '2017',
     threshold: (0 <= threshold && 100 >= threshold) ? threshold : 2,
-    overhang: !!parseInt(params[2], 10),
-    tagAlong: !!parseInt(params[3], 10),
+    overhang: !!parseInt(bits[2], 10),
+    tagAlong: !!parseInt(bits[3], 10),
     tagAlongSeats: (0 <= tagAlongSeats && 120 >= tagAlongSeats) ? tagAlongSeats : 1
   };
+
+  hashMap[hash] = params;
+
+  return params;
 }
 
 /**
- * [paramsToHash description]
+ * Serialise params into a hash string
  *
- * @param  {[type]} params [description]
- * @return {[type]}        [description]
+ * @param  {{}} params
+ * @return {string}
  */
 export function paramsToHash(params) {
   return btoa([
