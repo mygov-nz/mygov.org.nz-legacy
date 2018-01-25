@@ -46,5 +46,5 @@ export function mmpReviewTool(req, res) {
  * @param {*} res 
  */
 export function mmpReviewToolRedirect(req, res) {
-  res.redirect(302, 'https://mygov.org.nz/tools/mmp-review/MjAxNywyLDAsMCwx');
+  res.redirect(302, '/tools/mmp-review/MjAxNywyLDAsMCwx');
 }

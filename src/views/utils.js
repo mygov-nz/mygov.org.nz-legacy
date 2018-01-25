@@ -14,8 +14,8 @@ export function differenceClasses(value, prefix) {
  * @param {number} places
  * @returns {string}
  */
-export function differenceValue(value, places) {
-  return value ? `${ value > 0 ? '+' : '' }${ value.toFixed(places || 3) }` : '';
+export function differenceValue(value, places = 3) {
+  return value ? `${ value > 0 ? '+' : '' }${ value.toFixed(places) }` : '';
 }
 
 /**
@@ -24,6 +24,6 @@ export function differenceValue(value, places) {
  * @param {number} places
  * @returns {string}
  */
-export function roundFloat(value, places) {
-  return value ? value.toFixed(places || 3) : '';
+export function roundFloat(value, places = 3) {
+  return value ? value.toFixed(places) : '';
 }

@@ -35,20 +35,20 @@ class MMPReviewTool extends React.Component {
               <span className="input-label">Party vote threshold</span>
               <div className="input-group">
                 <input className="form-control" type="number" id="threshold" name="threshold" max="100" min="0" step="1" required value={this.props.params.threshold} onChange={this.props.handlers.setThreshold} />
-                <div className="input-group-addon">%</div>
+                <div className="input-group-append">
+                  <div className="input-group-text">%</div>
+                </div>
               </div>
             </label>
 
             <label className="col-sm-6 col-md-4 col-xl form-group custom-control custom-checkbox" htmlFor="overhang">
-              <span className="input-label">Allow overhang seats</span>
               <input type="checkbox" className="custom-control-input" id="overhang" name="overhang" value="on" checked={this.props.params.overhang} onChange={this.props.handlers.setOverhang} />
-              <span className="custom-control-indicator"></span>
+              <span className="custom-control-label">Allow overhang seats</span>
             </label>
 
             <label className="col-sm-6 col-md-4 col-xl form-group custom-control custom-checkbox" htmlFor="tagAlong">
-              <span className="input-label">Electorate tag-along</span>
               <input type="checkbox" className="custom-control-input" id="tagAlong" name="tagAlong" value="on" checked={this.props.params.tagAlong} onChange={this.props.handlers.setTagAlong} />
-              <span className="custom-control-indicator"></span>
+              <span className="custom-control-label">Electorate tag-along</span>
             </label>
 
             <label className="col-sm-6 col-md-4 col-xl form-group" htmlFor="tagAlongSeats">

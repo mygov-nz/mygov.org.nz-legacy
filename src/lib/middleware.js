@@ -26,8 +26,8 @@ export default function middlware (app) {
       defaultSrc: ['\'none\''],
       fontSrc: ['\'self\'', 'fonts.gstatic.com', 'data:'],
       imgSrc: ['\'self\'', 'www.google-analytics.com', 'stats.g.doubleclick.net', 'data:'],
-      scriptSrc: ['\'self\'', '\'unsafe-inline\'', 'www.google-analytics.com', 'stats.g.doubleclick.net'],
-      styleSrc: ['\'self\'', '\'unsafe-inline\''],
+      scriptSrc: ['\'self\'', '\'unsafe-inline\'', 'google-analytics.com', 'stats.g.doubleclick.net'],
+      styleSrc: ['\'self\'', '\'unsafe-inline\'', 'fonts.googleapis.com'],
     }
   }));
 

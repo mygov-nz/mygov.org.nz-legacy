@@ -5,7 +5,7 @@
   padding: .6875rem 1rem 0;
 }
 
-.input-label {
+.custom-control-label, .input-label {
   display: block;
   font-weight: 600;
   margin-bottom: .3125rem;
@@ -19,17 +19,18 @@
   margin-right: 0;
   padding-left: 15px;
 
-  .input-label {
+  .custom-control-label {
     padding-left: 1.5rem;
   }
 
-  .custom-control-indicator {
+  .custom-control-label:after,
+  .custom-control-label:before {
     left: 15px;
   }
 }
 
 .input-group {
-  .form-control:focus ~ .input-group-addon {
+  .form-control:focus ~ .input-group-append .input-group-text {
     background-color: lighten($input-focus-border-color, 15%);
     border-color: $input-focus-border-color;
   }
@@ -39,11 +40,12 @@
   .custom-checkbox {
     min-height: 4.1875rem;
 
-    .input-label {
+    .custom-control-label {
       padding-left: 0;
     }
 
-    .custom-control-indicator {
+    .custom-control-label:after,
+    .custom-control-label:before {
       height: 2.375rem;
       left: 15px;
       top: 1.8125rem;

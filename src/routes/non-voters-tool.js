@@ -45,5 +45,5 @@ export function nonVotersTool(req, res) {
  * @param {*} res 
  */
 export function nonVotersToolRedirect(req, res) {
-  res.redirect(302, 'https://mygov.org.nz/tools/non-voters/MjAxNyxAbncsNTAsMA==');
+  res.redirect(302, '/tools/non-voters/MjAxNyxAbncsMjUsMA==');
 }

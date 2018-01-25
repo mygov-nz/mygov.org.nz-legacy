@@ -7,7 +7,7 @@ const router = express.Router();
 /**
  * Homepage
  */
-router.get('/', (req, res) => res.redirect(302, 'https://mygov.org.nz/tools'));
+router.get('/', (req, res) => res.redirect(302, '/tools'));
 
 /**
  * Tools
