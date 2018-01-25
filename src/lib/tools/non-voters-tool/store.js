@@ -1,4 +1,5 @@
 import createHistory from 'history/createBrowserHistory';
+import debounce from 'lodash.debounce';
 import { createStore } from 'redux';
 import * as constants from './constants';
 import { hashToParams, paramsToHash } from './utils';
@@ -38,14 +39,14 @@ const store = createStore((state = {}, action) => {
   return state;
 });
 
-store.subscribe(() => {
+store.subscribe(debounce(() => {
   const state = store.getState();
   const hash = paramsToHash(state);
 
   if (hash !== history.location.pathname.slice(1)) {
     history.push(hash, state);
   }
-});
+}, 1000));
 
 history.listen((location, action) => {
   if (location.state === undefined) {
