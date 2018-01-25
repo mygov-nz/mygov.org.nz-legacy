@@ -54,7 +54,7 @@ gulp.task('css', () => {
       }
     }))
     .pipe(postcss(plugins))
-    .pipe(gulp.dest('src/public/css'));
+    .pipe(gulp.dest('build/public/css'));
 });
 
 /**

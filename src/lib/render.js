@@ -1,7 +1,9 @@
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Layout, { Views } from '../views';
+import Layout, { views } from '../views';
+
+const offset = path.resolve('build/views').length + 1;
 
 /**
  * 
@@ -10,11 +12,13 @@ import Layout, { Views } from '../views';
  * @param {Function} callback 
  */
 export default function render (filePath, options, callback) {
-  if (undefined === views[filePath]) {
+  const name = filePath.slice(offset, -3);
+
+  if (undefined === views[name]) {
     return callback(new Error('View not found'));
   }
 
-  const component = views[filePath];
+  const component = views[name];
 
   const layout = React.createElement(
     Layout,

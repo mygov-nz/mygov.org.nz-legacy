@@ -11,8 +11,6 @@ class Layout extends React.PureComponent {
    * @returns {JSX.Element}
    */
   render() {
-    const cdn = this.props.cdn;
-
     return (
       <html lang="en-NZ">
           <head>
@@ -22,12 +20,12 @@ class Layout extends React.PureComponent {
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta name="description" content={this.props.description} />
               <meta name="theme-color" content="#f89828" />
-              <meta name="msapplication-config" content={`${cdn}/browserconfig.xml`} />
-              <link rel="stylesheet" href={`${cdn}/css/style.css`} />
+              <meta name="msapplication-config" content="/browserconfig.xml" />
+              <link rel="stylesheet" href="/css/style.css" />
               <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&amp;subset=latin-ext" />
-              <link rel="manifest" href={`${cdn}/manifest.json`} />
-              <link rel="apple-touch-icon" href={`${cdn}/apple-touch-icon.png`} />
-              <link rel="mask-icon" href={`${cdn}/images/pinned-tab-icon.svg`} color="#f89828" />
+              <link rel="manifest" href="/manifest.json" />
+              <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+              <link rel="mask-icon" href="/images/pinned-tab-icon.svg" color="#f89828" />
           </head>
           <body>
               <a className="skippy sr-only sr-only-focusable" href="#content">Skip to main content</a>
@@ -65,9 +63,9 @@ class Layout extends React.PureComponent {
                 <a href="https://mygov.org.nz">mygov.org.nz</a>
               </footer>
 
-              <script src={`${cdn}/js/vendor.js`}></script>
-              <script src={`${cdn}/js/behaviour.js`}></script>
-              {(this.props.scripts || []).map(src => <script key={src} src={cdn + src} />)}
+              <script src="/js/vendor.js"></script>
+              <script src="/js/behaviour.js"></script>
+              {(this.props.scripts || []).map(src => <script key={src} src={src} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
               <script src="http://google-analytics.com/analytics.js" async defer></script>
               {/* <script dangerouslySetInnerHTML={{ __html: "if(navigator.serviceWorker){navigator.serviceWorker.register('/sw.js').catch(function(err){console.error('Unable to register service worker.',err)})}" }} /> */}

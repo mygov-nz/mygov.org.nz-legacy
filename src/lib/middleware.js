@@ -1,4 +1,3 @@
-import csurf from 'csurf';
 import helmet from 'helmet';
 import RateLimit from 'express-rate-limit';
 
@@ -46,14 +45,4 @@ export default function middlware (app) {
 
   app.use(helmet.xssFilter());
 
-  /**
-   * CSRF
-   */
-
-  app.use(csurf());
-
-  app.use((req, res, next) => { 
-    res.locals.csrfToken = req.csrfToken(); 
-    next();
-   });
 }
