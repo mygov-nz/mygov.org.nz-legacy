@@ -7,6 +7,7 @@ import routes from './routes';
 
 const app = express();
 
+app.set('trust proxy');
 middleware(app);
 
 app.engine('js', render);

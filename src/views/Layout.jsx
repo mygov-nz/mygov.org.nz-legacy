@@ -40,9 +40,6 @@ class Layout extends React.PureComponent {
 
                   <div className="collapse navbar-collapse" id="navbar">
                     <ul className="navbar-nav ml-auto">
-                      {/* <li className="nav-item active">
-                        <a className="nav-link" href="#">Home</a>
-                      </li> */}
                       <li className="nav-item dropdown">
                         <a className={classNames('nav-link dropdown-toggle', { active: this.props.nav === 'tools' })} href="/tools" id="navbar-tools" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-tools">
@@ -67,7 +64,7 @@ class Layout extends React.PureComponent {
               <script src="/js/behaviour.js"></script>
               {(this.props.scripts || []).map(src => <script key={src} src={src} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
-              <script src="http://google-analytics.com/analytics.js" async defer></script>
+              <script src="//google-analytics.com/analytics.js" async defer></script>
               {/* <script dangerouslySetInnerHTML={{ __html: "if(navigator.serviceWorker){navigator.serviceWorker.register('/sw.js').catch(function(err){console.error('Unable to register service worker.',err)})}" }} /> */}
           </body>
       </html>
