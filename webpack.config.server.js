@@ -7,7 +7,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: {
-    global: './handlers/global.js',
+    global: './src//global.js',
     'mmp-review-tool': './handlers/mmp-review-tool.js',
     'non-voters-tool': './handlers/non-voters-tool.js'
   },

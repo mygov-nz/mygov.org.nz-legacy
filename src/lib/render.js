@@ -1,7 +1,7 @@
 import path from 'path';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import { Layout, Views } from '../views';
+import Layout, { Views } from '../views';
 
 /**
  * 

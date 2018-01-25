@@ -10,7 +10,7 @@
     "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
   },
   "scripts": {
-    "build": "gulp",
+    "build": "rimraf build && gulp",
     "start": "./bin/www"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "cssnano": "^3.10.0",
     "exports-loader": "^0.6.4",
     "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
     "gulp-imagemin": "^3.4.0",
     "gulp-postcss": "^7.0.1",
     "gulp-replace": "^0.6.1",
@@ -63,6 +64,7 @@
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
     "popper.js": "^1.13.0",
+    "rimraf": "^2.6.2",
     "ts-loader": "^3.3.1",
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
