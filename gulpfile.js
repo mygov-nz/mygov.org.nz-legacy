@@ -1,6 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const babel = require('gulp-babel');
 const cssnano = require('cssnano');
+const favicon = require('gulp-to-ico');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
@@ -23,6 +24,7 @@ gulp.task('copy', () => {
     'src/public/apple-app-site-association',
     'src/public/browserconfig.xml',
     'src/public/crossdomain.xml',
+    'src/public/favicon.ico',
     'src/public/manifest.json',
     'src/public/robots.txt',
     'src/public/sitemap.xml'
@@ -57,6 +59,12 @@ gulp.task('css', () => {
     }))
     .pipe(postcss(plugins))
     .pipe(gulp.dest('build/public/css'));
+});
+
+gulp.task('favicon', ['images'], () => {
+  return gulp.src('build/public/images/favicon-*.png')
+    .pipe(favicon('favicon.ico'))
+    .pipe(gulp.dest('build/public'));
 });
 
 /**
@@ -133,6 +141,7 @@ gulp.task('sw', ['rev'], () => {
 gulp.task('default', [
   'copy',
   'css',
+  // 'favicon',
   'images',
   'js-client',
   'js-server',

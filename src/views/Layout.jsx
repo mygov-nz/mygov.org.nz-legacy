@@ -1,5 +1,10 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import manifest from '../rev-manifest.json';
+
+function asset(name) {
+  return (manifest[name] === undefined) ? name : manifest[name];
+}
 
 /**
  *
@@ -21,7 +26,7 @@ class Layout extends React.PureComponent {
               <meta name="description" content={this.props.description} />
               <meta name="theme-color" content="#f89828" />
               <meta name="msapplication-config" content="/browserconfig.xml" />
-              <link rel="stylesheet" href="/css/style.css" />
+              <link rel="stylesheet" href={`/${asset('css/style.css')}`} />
               <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&amp;subset=latin-ext" />
               <link rel="manifest" href="/manifest.json" />
               <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -60,9 +65,9 @@ class Layout extends React.PureComponent {
                 <a href="https://mygov.org.nz">mygov.org.nz</a>
               </footer>
 
-              <script src="/js/vendor.js"></script>
-              <script src="/js/behaviour.js"></script>
-              {(this.props.scripts || []).map(src => <script key={src} src={src} />)}
+              <script src={`/${asset('js/vendor.js')}`}></script>
+              <script src={`/${asset('js/behaviour.js')}`}></script>
+              {(this.props.scripts || []).map(src => <script key={src} src={`/${asset(src)}`} />)}
               <script dangerouslySetInnerHTML={{ __html: "window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;ga('create','UA-45926000-1','auto');ga('send','pageview')" }} />
               <script src="//google-analytics.com/analytics.js" async defer></script>
               <script dangerouslySetInnerHTML={{ __html: "if(navigator.serviceWorker){navigator.serviceWorker.register('/sw.js').catch(function(err){console.error('Unable to register service worker.',err)})}" }} />

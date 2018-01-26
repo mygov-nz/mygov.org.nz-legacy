@@ -32,7 +32,7 @@ export function mmpReviewTool(req, res) {
       title: 'MMP Review Tool - MyGov',
       description: 'This tool was created to allow users to evaluate the possible effects of changes to rules determining the outcome of a New Zealand General Election.',
       scripts: [
-        '/js/mmp-review-tool.js'
+        'js/mmp-review-tool.js'
       ]
     },
     props

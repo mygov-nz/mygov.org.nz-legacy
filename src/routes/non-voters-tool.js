@@ -31,7 +31,7 @@ export function nonVotersTool(req, res) {
       title: 'Non-voters Tool - MyGov',
       description: 'This tool was created to allow users to evaluate the possible effects of hypothetical situations where non-voters had instead chosen to vote.',
       scripts: [
-        '/js/non-voters-tool.js'
+        'js/non-voters-tool.js'
       ]
     },
     props
