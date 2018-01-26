@@ -31,6 +31,10 @@
     "jsx-wrap-multiline": [
       true
     ],
+    "no-unused-variable": [
+      true,
+      { "ignore-pattern": "^_" }
+    ],
     "semicolon": [
       true,
       "always"
