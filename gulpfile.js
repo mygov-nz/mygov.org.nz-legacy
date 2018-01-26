@@ -4,6 +4,8 @@ const cssnano = require('cssnano');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
+const rev = require('gulp-rev');
+const revDel = require('gulp-rev-delete-original');
 const sass = require('gulp-sass');
 const sketch = require('gulp-sketch');
 const webpack = require('webpack');
@@ -103,22 +105,30 @@ gulp.task('js-server', () => {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('rev', () => {
+  return gulp.src([
+    'build/public/css/style.css',
+    'build/public/js/*.js'
+  ], { base: 'build/public' })
+    .pipe(rev())
+    .pipe(revDel())
+    .pipe(gulp.dest('build/public'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('build'));
+});
+
 /**
  * Service Worker
  */
-gulp.task('sw', ['css', 'js-client'], () => {
+gulp.task('sw', ['rev'], () => {
   return workbox.generateSW({
-    globDirectory: __dirname + '/build',
+    globDirectory: __dirname + '/build/public',
     swDest: __dirname + '/build/public/sw.js',
     globPatterns: ['**\/*.{js,css}']
   })
-  .then(() => {
-    console.log('Service worker generated.');
-  })
-  .catch(error => {
-    console.log(`[ERROR] ${error}`);
-  });
-})
+  .then(() => console.log('Service worker generated.'))
+  .catch(error => console.log(`[ERROR] ${error}`));
+});
 
 gulp.task('default', [
   'copy',

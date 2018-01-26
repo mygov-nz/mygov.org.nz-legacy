@@ -10,7 +10,7 @@
     "url": "git+https://github.com/mygov-nz/mygov.org.nz.git"
   },
   "scripts": {
-    "build": "rimraf build && gulp",
+    "build": "rimraf build && gulp && gulp sw",
     "start": "./bin/www"
   },
   "dependencies": {
@@ -55,6 +55,8 @@
     "gulp-imagemin": "^3.4.0",
     "gulp-postcss": "^7.0.1",
     "gulp-replace": "^0.6.1",
+    "gulp-rev": "^8.1.1",
+    "gulp-rev-delete-original": "^0.2.3",
     "gulp-sass": "^3.1.0",
     "gulp-sketch": "^1.0.5",
     "gulp-sourcemaps": "^2.6.3",

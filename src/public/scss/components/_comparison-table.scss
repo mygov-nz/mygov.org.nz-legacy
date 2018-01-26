@@ -12,7 +12,6 @@
   }
 
   tbody th {
-    padding-left: 2.5rem;
     position: relative;
     text-align: left;
   }
@@ -45,4 +44,13 @@
     border-radius: .375rem;
   }
 
+}
+
+
+@include media-breakpoint-up(sm) {
+  .comparison-table {
+    tbody th {
+      padding-left: 2.5rem;
+    }
+  }
 }
