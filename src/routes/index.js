@@ -2,7 +2,10 @@ import express from 'express';
 import { mmpReviewTool, mmpReviewToolRedirect } from './mmp-review-tool';
 import { nonVotersTool, nonVotersToolRedirect } from './non-voters-tool';
 
-const router = express.Router();
+const router = express.Router({
+  caseSensitive: true,
+  strict: true
+});
 
 /**
  * Homepage

@@ -1,5 +1,5 @@
 import helmet from 'helmet';
-import RateLimit from 'express-rate-limit';
+// import RateLimit from 'express-rate-limit';
 
 /**
  * @param {*} app 
@@ -10,11 +10,11 @@ export default function middlware (app) {
    * Rate limit
    */
 
-  app.use(new RateLimit({
+  /* app.use(new RateLimit({
     windowMs: 9e5, // 15 minutes 
     max: 100,      // limit each IP to 100 requests per windowMs 
     delayMs: 0     // disable delaying - full speed until the max limit is reached 
-  }));
+  })); */
 
   /**
    * Helmet
@@ -39,7 +39,8 @@ export default function middlware (app) {
 
   app.use(helmet.frameguard({ action: 'deny' }));
 
-  app.use(helmet.hidePoweredBy({ setTo: 'Democracy' }));
+  // app.use(helmet.hidePoweredBy({ setTo: 'Democracy' }));
+  app.use(helmet.hidePoweredBy());
 
   app.use(helmet.noSniff());
 
