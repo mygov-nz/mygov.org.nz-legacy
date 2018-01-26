@@ -24,6 +24,7 @@ export default function middlware (app: express.Application): void {
   app.use(helmet.contentSecurityPolicy({
     directives: {
       sandbox: ['allow-forms', 'allow-scripts', 'allow-same-origin'],
+      connectSrc: ['\'self\''],
       defaultSrc: ['\'none\''],
       fontSrc: ['\'self\'', 'fonts.gstatic.com', 'data:'],
       imgSrc: ['\'self\'', 'www.google-analytics.com', 'stats.g.doubleclick.net', 'data:'],
