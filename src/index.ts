@@ -1,12 +1,12 @@
 import 'clarify';
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express from 'express';
 import path from 'path';
 import middleware from './lib/middleware';
 import render from './lib/render';
 import NotFoundError from './lib/error/NotFoundError';
 import routes from './routes';
 
-const app: Express = express();
+const app: express.Application = express();
 
 app.enable('trust proxy');
 app.disable('etag');
@@ -20,12 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 // catch 404 and forward to error handler
-app.use((_req: Request, _res: Response, next: NextFunction): void => {
+app.use((_req: express.Request, _res: express.Response, next: express.NextFunction): void => {
   next(new NotFoundError('Page not Found'));
 });
 
 // error handler
-app.use((error: NotFoundError, req: Request, res: Response, _next: NextFunction): void => {
+app.use((error: NotFoundError, req: express.Request, res: express.Response, _next: express.NextFunction): void => {
   res.status(error.status || 500);
   res.render('ErrorPage', {
     layout: {

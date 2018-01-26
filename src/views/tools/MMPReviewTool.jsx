@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, { PureComponent } from 'react';
 import { getYears } from '../../data';
 import ComparisonTable from '../widgets/ComparisonTable';
 
 /**
  *
  */
-class MMPReviewTool extends React.Component {
+class MMPReviewTool extends PureComponent {
 
   /**
    *

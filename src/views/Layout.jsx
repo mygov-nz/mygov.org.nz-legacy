@@ -27,7 +27,7 @@ class Layout extends React.PureComponent {
               <meta name="theme-color" content="#f89828" />
               <meta name="msapplication-config" content="/browserconfig.xml" />
               <link rel="stylesheet" href={`/${asset('css/style.css')}`} />
-              <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&amp;subset=latin-ext" />
+              <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&amp;subset=latin-ext" />
               <link rel="manifest" href="/manifest.json" />
               <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
               <link rel="mask-icon" href="/images/pinned-tab-icon.svg" color="#f89828" />

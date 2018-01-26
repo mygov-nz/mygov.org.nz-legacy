@@ -84,18 +84,25 @@ module.exports = {
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: [
-            ['env', {
-              targets: {
-                browsers: ['last 2 versions', '> 1%', 'ie >= 11']
-              }
-            }],
-            'react'
-          ]
-        }
+        loaders:  [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                ['env', {
+                  targets: {
+                    browsers: ['last 2 versions', '> 1%', 'ie >= 11']
+                  }
+                }],
+                'react'
+              ]
+            }
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ],
+        exclude: /node_modules/
       }
     ]
   },

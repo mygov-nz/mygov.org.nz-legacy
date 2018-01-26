@@ -27,18 +27,25 @@ module.exports = {
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: [
-            ["env", {
-              "targets": {
-                "node": "6.10.3"
-              }
-            }],
-            'react'
-          ]
-        }
+        loaders:  [
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: [
+                ["env", {
+                  "targets": {
+                    "node": "6.10.3"
+                  }
+                }],
+                'react'
+              ]
+            }
+          },
+          {
+            loader: 'ts-loader'
+          }
+        ],
+        exclude: /node_modules/
       }
     ]
   },

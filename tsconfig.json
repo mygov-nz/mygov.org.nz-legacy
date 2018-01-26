@@ -31,7 +31,11 @@
     ],
     "exclude": [
       "build",
-      "node_modules"
+      "node_modules",
+      "gulpfile.js",
+      "types.ts",
+      "webpack.config.js",
+      "webpack.config.server.js"
     ],
     "compileOnSave": false
   }
