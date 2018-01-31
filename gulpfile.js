@@ -156,12 +156,11 @@ gulp.task('sw', ['rev', 'workbox'], (callback) => {
   });
 
   const sw = `importScripts('workbox-sw.prod.v${pkgLock.dependencies['workbox-build'].version}.js');
-  const workboxSW = new self.WorkboxSW({
-    skipWaiting: true,
-    clientsClaim: true
-  });
-  workboxSW.precache(${JSON.stringify(fileManifest)});
-  `;
+const workbox = new WorkboxSW({ clientsClaim: true, skipWaiting: true });
+workbox.precache(${JSON.stringify(fileManifest)});
+workbox.router.registerRoute('/', workbox.strategies.NetworkFirst());
+workbox.router.registerRoute(/^\/tools/i, workbox.strategies.NetworkFirst();
+`;
 
   fs.writeFile('build/sw.js', sw, callback);
 });
