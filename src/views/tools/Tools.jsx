@@ -16,10 +16,10 @@ export default function Tools (props) {
 
       <ul className="row tool-list">
         <li className="col">
-          <a href="/tools/non-voters">Non-voters Tool</a>
+          <a href="/tools/mmp-review">MMP Review tool</a>
         </li>
         <li className="col">
-          <a href="/tools/mmp-review">MMP Review tool</a>
+          <a href="/tools/non-voters">Non-voters Tool</a>
         </li>
       </ul>
 

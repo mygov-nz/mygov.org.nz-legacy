@@ -14,12 +14,16 @@
       "strictNullChecks": true,
       "noImplicitReturns": true,
       "noUnusedParameters": true,
-      "noUnusedLocals": true
+      "noUnusedLocals": true,
+      "typeRoots": [
+        "./node_modules/@types",
+        "./typings"
+      ]
     },
     "filesGlob": [
-      "typings/index.d.ts",
-      "src/**/*.ts",
-      "src/**/*.tsx"
+      "./typings/*.d.ts",
+      "./src/**/*.ts",
+      "./src/**/*.tsx"
     ],
     "types": [
       "classnames",
@@ -33,7 +37,6 @@
       "build",
       "node_modules",
       "gulpfile.js",
-      "types.ts",
       "webpack.config.js",
       "webpack.config.server.js"
     ],

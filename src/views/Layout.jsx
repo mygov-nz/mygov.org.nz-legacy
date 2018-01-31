@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import manifest from '../rev-manifest.json';
+
+const manifest = require('../rev-manifest');
 
 function asset(name) {
   return (manifest[name] === undefined) ? name : manifest[name];

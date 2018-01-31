@@ -2,6 +2,7 @@ const autoprefixer = require('autoprefixer');
 const babel = require('gulp-babel');
 const cssnano = require('cssnano');
 const favicon = require('gulp-to-ico');
+const fs = require('fs');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const postcss = require('gulp-postcss');
@@ -9,10 +10,12 @@ const rev = require('gulp-rev');
 const revDel = require('gulp-rev-delete-original');
 const sass = require('gulp-sass');
 const sketch = require('gulp-sketch');
+const ts = require('gulp-typescript');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const webpackStream = require('webpack-stream');
 const workbox = require('workbox-build');
+const pkgLock = require('./package-lock.json');
 
 /**
  * Copy
@@ -94,12 +97,15 @@ gulp.task('js-client', () => {
  * JS (Server)
  */
 gulp.task('js-server', () => {
+  const tsProject = ts.createProject('tsconfig.json');
+
   return gulp.src([
       'src/*',
       'src/**/*',
       '!src/public/*',
       '!src/public/**/*'
     ], { base: 'src' })
+    .pipe(tsProject())
     .pipe(babel({
       presets: [
         ['env', {
@@ -113,9 +119,9 @@ gulp.task('js-server', () => {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('rev', () => {
+gulp.task('rev', ['css', 'js-client'], () => {
   return gulp.src([
-    'build/public/css/style.css',
+    'build/public/css/*.css',
     'build/public/js/*.js'
   ], { base: 'build/public' })
     .pipe(rev())
@@ -125,14 +131,48 @@ gulp.task('rev', () => {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('manifest', ['rev'], (callback) => {
+  const revManifest = require('./build/rev-manifest.json');
+  const manifest = `module.exports = ${JSON.stringify(revManifest)};`;
+
+  fs.writeFile('build/rev-manifest.js', manifest, callback);
+});
+
 /**
  * Service Worker
  */
-gulp.task('sw', ['rev'], () => {
+gulp.task('sw', ['rev', 'workbox'], (callback) => {
+  const revManifest = require('./build/rev-manifest.json');
+  const fileManifest = [];
+
+  Object.keys(revManifest).map(key => {
+    const url = revManifest[key];
+    const match = revManifest[key].match(/-([0-9a-f]{10})\.[a-z]+$/);
+
+    fileManifest.push({
+      url,
+      revision: match[1]
+    });
+  });
+
+  const sw = `importScripts('workbox-sw.prod.v${pkgLock.dependencies['workbox-build'].version}.js');
+  const workboxSW = new self.WorkboxSW({
+    skipWaiting: true,
+    clientsClaim: true
+  });
+  workboxSW.precache(${JSON.stringify(fileManifest)});
+  `;
+
+  fs.writeFile('build/sw.js', sw, callback);
+});
+
+gulp.task('workbox', ['manifest'], () => {
   return workbox.generateSW({
     globDirectory: __dirname + '/build/public',
     swDest: __dirname + '/build/public/sw.js',
-    globPatterns: ['**\/*.{js,css}']
+    globPatterns: ['**\/*.{js,css}'],
+    clientsClaim: true,
+    skipWaiting: true
   })
   .then(() => console.log('Service worker generated.'))
   .catch(error => console.log(`[ERROR] ${error}`));
@@ -145,5 +185,7 @@ gulp.task('default', [
   'images',
   'js-client',
   'js-server',
+  'manifest',
+  'rev',
   'sw'
 ]);

@@ -53,7 +53,7 @@ class MMPReviewTool extends PureComponent {
 
             <label className="col-sm-6 col-md-4 col-xl form-group" htmlFor="tagAlongSeats">
               <span className="input-label">Seats for tag-along</span>
-              <input className="form-control" type="number" id="tagAlongSeats" name="tagAlongSeats" max="120" min="1" step="1" required value={this.props.params.tagAlongSeats} onChange={this.props.handlers.setTagAlongSeats} />
+              <input className="form-control" type="number" id="tagAlongSeats" name="tagAlongSeats" max="120" min="1" step="1" required={this.props.params.tagAlong} disabled={!this.props.params.tagAlong} value={this.props.params.tagAlongSeats} onChange={this.props.handlers.setTagAlongSeats} />
             </label>
 
           </form>
