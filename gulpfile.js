@@ -11,6 +11,7 @@ const revDel = require('gulp-rev-delete-original');
 const sass = require('gulp-sass');
 const sketch = require('gulp-sketch');
 const ts = require('gulp-typescript');
+const uglify = require('uglify-js');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const webpackStream = require('webpack-stream');
@@ -143,7 +144,25 @@ gulp.task('manifest', ['rev'], (callback) => {
  */
 gulp.task('sw', ['rev', 'workbox'], (callback) => {
   const revManifest = require('./build/rev-manifest.json');
-  const fileManifest = [];
+  const build = `build_${Date.now().toString(36)}`;
+  const fileManifest = [
+    {
+      url: '/',
+      revision: build
+    },
+    {
+      url: '/tools',
+      revision: build
+    },
+    {
+      url: '/tools/mmp-review',
+      revision: build
+    },
+    {
+      url: '/tools/non-voters',
+      revision: build
+    }
+  ];
 
   Object.keys(revManifest).map(key => {
     const url = revManifest[key];
@@ -158,8 +177,14 @@ gulp.task('sw', ['rev', 'workbox'], (callback) => {
   const sw = `importScripts('workbox-sw.prod.v${pkgLock.dependencies['workbox-build'].version}.js');
 const workbox = new WorkboxSW({ clientsClaim: true, skipWaiting: true });
 workbox.precache(${JSON.stringify(fileManifest)});
-workbox.router.registerRoute('/', workbox.strategies.NetworkFirst());
-workbox.router.registerRoute(/^\/tools/i, workbox.strategies.NetworkFirst();
+const router = workbox.router;
+const strategies = workbox.strategies;
+router.registerNavigationRoute('/');
+router.registerNavigationRoute('/tools');
+router.registerNavigationRoute('/tools/mmp-review');
+router.registerNavigationRoute('/tools/non-voters');
+router.registerRoute('/tools/mmp-review/:hash', strategies.CacheFirst());
+router.registerRoute('/tools/non-voters/:hash', strategies.CacheFirst());
 `;
 
   fs.writeFile('build/sw.js', sw, callback);
@@ -168,7 +193,7 @@ workbox.router.registerRoute(/^\/tools/i, workbox.strategies.NetworkFirst();
 gulp.task('workbox', ['manifest'], () => {
   return workbox.generateSW({
     globDirectory: __dirname + '/build/public',
-    swDest: __dirname + '/build/public/sw.js',
+    swDest: __dirname + '/build/public/_sw.js',
     globPatterns: ['**\/*.{js,css}'],
     clientsClaim: true,
     skipWaiting: true
