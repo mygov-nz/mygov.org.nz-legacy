@@ -13,7 +13,8 @@ export function nonVotersTool(req, res) {
   const state = hashToParams(req.params.hash);
   const props = resultSelector(state);
   const headers = {
-    Link: '<https://mygov.org.nz/tools/non-voters>; rel="canonical"'
+    'Cache-Control': 'public, max-age=3600',
+    'Link': '<https://mygov.org.nz/tools/non-voters>; rel="canonical"'
   };
 
   props.params = state;
@@ -45,5 +46,6 @@ export function nonVotersTool(req, res) {
  * @param {*} res 
  */
 export function nonVotersToolRedirect(req, res) {
+  res.set('Cache-Control', 'public, max-age=3600');
   res.redirect(302, '/tools/non-voters/MjAxNyxAbncsMjUsMA==');
 }

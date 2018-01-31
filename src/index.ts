@@ -16,7 +16,10 @@ app.engine('js', render);
 app.set('view engine', 'js');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  index: false,
+  setHeaders: (res) => res.set('Cache-Control', 'max-age=365000000, immutable')
+}));
 app.use(routes);
 
 // catch 404 and forward to error handler

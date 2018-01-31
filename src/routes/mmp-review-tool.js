@@ -13,7 +13,8 @@ export function mmpReviewTool(req, res) {
   const state = hashToParams(req.params.hash);
   const props = resultSelector(state);
   const headers = {
-    Link: '<https://mygov.org.nz/tools/mmp-review>; rel="canonical"'
+    'Cache-Control': 'public, max-age=3600',
+    'Link': '<https://mygov.org.nz/tools/mmp-review>; rel="canonical"'
   };
 
   props.params = state;
@@ -46,5 +47,6 @@ export function mmpReviewTool(req, res) {
  * @param {*} res 
  */
 export function mmpReviewToolRedirect(req, res) {
+  res.set('Cache-Control', 'public, max-age=3600');
   res.redirect(302, '/tools/mmp-review/MjAwOCw0LDAsMCwx');
 }
