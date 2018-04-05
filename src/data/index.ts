@@ -8,11 +8,11 @@ import mygov from '../../typings';
  * @returns {mygov.IElection}
  */
 export function getData (year: string): mygov.IElection {
-  const data: mygov.IDataElection = elections[year];
-
-  if (undefined === data) {
+  if (!elections.hasOwnProperty(year)) {
     throw new Error('Year not found');
   }
+
+  const data: mygov.IDataElection = elections[year];
 
   return {
     totalVoters: data.t,

@@ -11,7 +11,7 @@ const revDel = require('gulp-rev-delete-original');
 const sass = require('gulp-sass');
 const sketch = require('gulp-sketch');
 const ts = require('gulp-typescript');
-const uglify = require('uglify-js');
+const uglify = require('uglify-es');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const webpackStream = require('webpack-stream');
@@ -147,19 +147,19 @@ gulp.task('sw', ['rev', 'workbox'], (callback) => {
   const build = `build_${Date.now().toString(36)}`;
   const fileManifest = [
     {
-      url: '/',
+      url: '',
       revision: build
     },
     {
-      url: '/tools',
+      url: 'tools',
       revision: build
     },
     {
-      url: '/tools/mmp-review',
+      url: 'tools/mmp-review',
       revision: build
     },
     {
-      url: '/tools/non-voters',
+      url: 'tools/non-voters',
       revision: build
     }
   ];
@@ -187,13 +187,16 @@ router.registerRoute('/tools/mmp-review/:hash', strategies.CacheFirst());
 router.registerRoute('/tools/non-voters/:hash', strategies.CacheFirst());
 `;
 
-  fs.writeFile('build/sw.js', sw, callback);
+  const options = {};
+  const minified = uglify.minify(sw, options);
+
+  fs.writeFile('build/public/sw.js', minified.code, callback);
 });
 
 gulp.task('workbox', ['manifest'], () => {
   return workbox.generateSW({
     globDirectory: __dirname + '/build/public',
-    swDest: __dirname + '/build/public/_sw.js',
+    swDest: __dirname + '/build/public/sw.js',
     globPatterns: ['**\/*.{js,css}'],
     clientsClaim: true,
     skipWaiting: true
